@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!-- saved from url=(0104)http://localhost:63342/helloworld/sothich.html?_ijt=8d7oe72aup4ungqcoteeulsu5h&_ij_reload=RELOAD_ON_SAVE -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Sở thích của bạn</title>
+    <style>
+        th{
+            background-color: red;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+
+<form>
+    <table align="center">
+        <tbody><tr>
+            <th colspan="2"><h1>SỞ THÍCH CỦA BẠN</h1></th>
+        </tr>
+        <tr>
+            <td align="right">Họ và Tên:</td>
+            <td align="left"><input name="yourname" type="text"></td>
+        </tr>
+        <tr>
+            <td align="right">Email:</td>
+            <td align="left"><input name="email" type="text"></td>
+        </tr>
+        <tr>
+            <td align="right">Sở thích:</td>
+            <td align="left">
+                <label><input name="hobby" value="0" type="checkbox"> Thể thao</label>
+                <label><input name="hobby" value="1" type="checkbox"> Âm nhạc</label>
+                <label><input name="hobby" value="2" type="checkbox"> Đọc sách</label>
+                </td>
+            </tr>
+        <tr>
+            <td></td>
+            <td align="left">
+                    <label><input name="hobby" value="3" type="checkbox"> Lướt web</label>
+                    <label><input name="hobby" value="4" type="checkbox"> Chơi game</label>
+                    <label><input name="hobby" value="5" type="checkbox"> Điện ảnh</label>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td align="left">
+                <label><input name="hobby" value="6" type="checkbox"> Du lịch</label>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td align="left">
+                <input type="submit" value="Gửi thông tin">
+                <input type="reset" value="RESET">
+            </td>
+        </tr>
+    </tbody></table>
+</form>
+
+<script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script></body></html>

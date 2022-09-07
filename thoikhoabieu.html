@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- saved from url=(0109)http://localhost:63342/helloworld/thoikhoabieu.html?_ijt=f43n7mvlj9hg9di0ck2suhrnrh&_ij_reload=RELOAD_ON_SAVE -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Thời khóa biểu</title>
+    <style>
+        #upper{
+            color:green;
+            style:bold;
+        }
+        #lower{
+            background-color:green;
+            color:white;
+        }
+        .lightgreen{
+            background-color:white;
+            color:black;
+        }
+    </style>
+</head>
+<body>
+<table id="upper" align="center">
+    <tbody><tr align="center"><td colspan="2"><h2>THỜI KHÓA BIỂU</h2></td></tr>
+    <tr><td>Lớp T0908I</td><td>Thời gian học: 13h30-17h30</td></tr>
+    <tr><td>Giáo viên: KhoaNV</td><td>Ngày học: T3-5-7</td></tr>
+    <tr><td>Phòng học: Class3/Lab3</td><td></td></tr>
+</tbody></table>
+
+<table border="1" id="lower" align="center">
+    <tbody><tr><td colspan="3"></td><td>Thứ 3</td><td>Thứ 5</td><td>Thứ 7</td></tr>
+    <tr><td>Tuần</td><td>Ngày bắt đầu</td><td>Ngày kết thức</td><td colspan="3" align="center">Môn học</td></tr>
+    <tr class="lightgreen"><td>01</td><td>01-09-2009</td><td>05-09-2009</td><td>CF-L1.T1</td><td>CF-L2.T2</td><td>CF-L3.T3</td></tr>
+    <tr class="lightgreen"><td>01</td><td>01-09-2009</td><td>05-09-2009</td><td>CF-L1.T1</td><td>CF-L2.T2</td><td>CF-L3.T3</td></tr>
+    <tr class="lightgreen"><td>01</td><td>01-09-2009</td><td>05-09-2009</td><td>CF-L1.T1</td><td>CF-L2.T2</td><td>CF-L3.T3</td></tr>
+</tbody></table>
+
+<script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script></body></html>

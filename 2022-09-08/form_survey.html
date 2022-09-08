@@ -176,10 +176,17 @@
 		<input id="txtUSD" type="text" size="10" tabindex="0"/>
 		<label for="txtUSD">Dollars</label>
 	</span>
+<<<<<<< HEAD
                 <span class="symbol radix">.</span>
                 <span class="cents">
 		<input id="txtCent" type="text" value="" size="2" maxlength="2" tabindex="0"/>
 		<label for="txtCent">Cents</label>
+=======
+        <span class="symbol radix">.</span>
+        <span class="cents">
+		<input	type="text" class="field text nospin" value=""	size="2" maxlength="2" tabindex="0" 	/>
+		<label>Cents</label>
+>>>>>>> 275d6cf1c9fc63aa71ff800177e195d7fbd52d57
 	</span>
             </li>
 
@@ -215,6 +222,7 @@
                         <td>Agree</td>
                         <td>Strongly Agree</td>
 
+<<<<<<< HEAD
                     </tr>
                     </thead>
                     <tbody>
@@ -298,6 +306,79 @@
                     </tbody>
                 </table>
             </li>
+=======
+          </tr>
+          </thead>
+          <tbody>
+          <tr  role="radiogroup" aria-labelledby="Field-403" class="statement403">
+            <th>
+              <label id="Field-403">Our products are priced fairly.</label>
+            </th>
+            <td title="Strongly Disagree">
+              <input id="Field403_1" name="Field403" type="radio" role="radio" tabindex="0" aria-checked="false" value="Strongly Disagree" 												onchange="handleInput(this);" 						            												/>
+              <label for="Field403_1">1</label>
+            </td>
+            <td title="Disagree">
+              <input id="Field403_2" name="Field403" type="radio" role="radio" tabindex="0" aria-checked="false" value="Disagree" 												onchange="handleInput(this);" 						            												/>
+              <label for="Field403_2">2</label>
+            </td>
+            <td title="Agree">
+              <input id="Field403_3" name="Field403" type="radio" role="radio"	tabindex="0"  aria-checked="false" 	value="Agree" 												onchange="handleInput(this);" 						            												/>
+              <label for="Field403_3">3</label>
+            </td>
+            <td title="Strongly Agree">
+              <input id="Field403_4" name="Field403" type="radio" role="radio" tabindex="0" aria-checked="false" 	value="Strongly Agree" 							            												/>
+              <label for="Field403_4">4</label>
+            </td>
+          </tr>
+          <tr  role="radiogroup" aria-labelledby="Field-404"  class="alt statement404" >
+            <th>
+              <label id="Field-404">
+                Our products are high quality.
+              </label>
+            </th>
+            <td  title="Strongly Disagree"  >
+              <input id="Field404_1" name="Field404" type="radio"  role="radio" tabindex="0"   aria-checked="false" 	value="Strongly Disagree" 							            												/>
+              <label for="Field404_1">1</label>
+            </td>
+            <td title="Disagree">
+              <input id="Field404_2" name="Field404" 	type="radio"   role="radio" tabindex="0" aria-checked="false" 	value="Disagree" 												onchange="handleInput(this);" 						            												/>
+              <label for="Field404_2">2</label>
+            </td>
+            <td  title="Agree">
+              <input id="Field404_3" name="Field404" type="radio"   role="radio" tabindex="0"  aria-checked="false"	value="Agree" 												onchange="handleInput(this);" 						            												/>
+              <label for="Field404_3">3</label>
+            </td>
+            <td title="Strongly Agree">
+              <input name="Field404" type="radio" role="radio" tabindex="0" aria-checked="false" value="Strongly Agree"/>
+              <label>4</label>
+            </td>
+          </tr>
+          <tr role="radiogroup"  aria-labelledby="Field-405" class="statement405">
+            <th>
+              <label  id="Field-405">You would recommend our product to a friend or coworker. </label>
+            </th>
+            <td title="Strongly Disagree">
+              <input name="Field405" 	type="radio"  role="radio"	tabindex="0"  aria-checked="false" 	value="Strongly Disagree" 												onchange="handleInput(this);" 						            												/>
+              <label>1</label>
+            </td>
+            <td title="Disagree">
+              <input id="Field405_2" name="Field405" type="radio" role="radio"	tabindex="0" aria-checked="false" value="Disagree" 												onchange="handleInput(this);" 						            												/>
+              <label for="Field405_2">2</label>
+            </td>
+            <td title="Agree">
+              <input id="Field405_3" name="Field405" type="radio"  role="radio" tabindex="0"  aria-checked="false" 	value="Agree" 												onchange="handleInput(this);" 						            												/>
+              <label for="Field405_3">3</label>
+            </td>
+            <td title="Strongly Agree">
+              <input name="Field405" type="radio"  role="radio" tabindex="0"   aria-checked="false" value="Strongly Agree" 												onchange="handleInput(this);" 						            												/>
+              <label>4</label>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </li>
+>>>>>>> 275d6cf1c9fc63aa71ff800177e195d7fbd52d57
 
             <li class="buttons ">
                 <div>
@@ -312,40 +393,4 @@
 
 </div><!--container-->
 </body>
-</html><script>
-(function() {
-  var ws = new WebSocket('ws://' + window.location.host + 
-             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
-             'referrer=' + encodeURIComponent(window.location.pathname));
-  ws.onmessage = function (msg) {
-      if (msg.data === 'reload') {
-          window.location.reload();
-      }
-      if (msg.data.startsWith('update-css ')) {
-          var messageId = msg.data.substring(11);
-          var links = document.getElementsByTagName('link');
-          for (var i = 0; i < links.length; i++) {
-              var link = links[i];
-              if (link.rel !== 'stylesheet') continue;
-              var clonedLink = link.cloneNode(true);
-              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
-              if (newHref !== link.href) {
-                clonedLink.href = newHref;
-              }
-              else {
-                var indexOfQuest = newHref.indexOf('?');
-                if (indexOfQuest >= 0) {
-                  // to support ?foo#hash 
-                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
-                                    newHref.substring(indexOfQuest + 1);
-                }
-                else {
-                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
-                }
-              }
-              link.replaceWith(clonedLink);
-          }
-      }
-  };
-})();
-</script>
+</html>

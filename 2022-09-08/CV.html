@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CV-NGUYỄN TRẦN MINH</title>
+  <style>
+    #cv{
+      display: flex;
+      justify-content: center;
+    }
+    table li{
+      list-style: none;
+    }
+    th{
+      text-align: center;
+    }
+    img{
+      
+    }
+  </style>
+</head>
+<body>
+<div id="cv">
+  <table>
+    <tr><th><h1>CURRICULUM VITAE</h1></th></tr>
+  <tr>
+    <td>
+    <ul>
+      <li>Họ và tên: NGUYỄN TRẦN MINH</li>
+      <li>Địa chỉ: 41/15/1A Gò Cát phường Phú Hữu quận 9</li>
+      <li>Điện thoại: 096 2274 911</li>
+      <li>Email: nguyenminhk2000@gmail.com</li>
+      <li><img src="https://chocanh.vn/wp-content/uploads/cho-pomeranian-fox-soc-mini.jpg"/></li>
+      <li>Học vấn: Cử nhân</li>
+      <li>Bằng cấp: Tin học</li>
+      <li>Kỹ năng: lập trình web hướng đối tượng</li>
+      <li>Kinh nghiệm: chưa có</li>
+      <li>Định hướng phát triển cá nhân: lập trình viên chuyên nghiệp full-stack</li>
+    </ul>
+    </td>
+  </tr>
+  </table>
+</div>
+</body>
+</html><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

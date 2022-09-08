@@ -174,7 +174,7 @@
 	</span>
         <span class="symbol radix">.</span>
         <span class="cents">
-		<input	type="text" class="field text nospin" value=""	size="2" maxlength="2" tabindex="0" 						onkeyup="handleInput(this);" 			onchange="handleInput(this);" 			      			/>
+		<input	type="text" class="field text nospin" value=""	size="2" maxlength="2" tabindex="0" 	/>
 		<label>Cents</label>
 	</span>
       </li>
@@ -219,19 +219,19 @@
               <label id="Field-403">Our products are priced fairly.</label>
             </th>
             <td title="Strongly Disagree">
-              <input id="Field403_1" name="Field403" type="radio" role="radio" tabindex="0" aria-checked="false" 						value="Strongly Disagree" 												onchange="handleInput(this);" 						            												/>
+              <input id="Field403_1" name="Field403" type="radio" role="radio" tabindex="0" aria-checked="false" value="Strongly Disagree" 												onchange="handleInput(this);" 						            												/>
               <label for="Field403_1">1</label>
             </td>
             <td title="Disagree">
-              <input id="Field403_2" name="Field403" type="radio" role="radio" tabindex="0" aria-checked="false" 						value="Disagree" 												onchange="handleInput(this);" 						            												/>
+              <input id="Field403_2" name="Field403" type="radio" role="radio" tabindex="0" aria-checked="false" value="Disagree" 												onchange="handleInput(this);" 						            												/>
               <label for="Field403_2">2</label>
             </td>
             <td title="Agree">
-              <input id="Field403_3" name="Field403" type="radio" role="radio"	tabindex="0"  aria-checked="false" 						value="Agree" 												onchange="handleInput(this);" 						            												/>
+              <input id="Field403_3" name="Field403" type="radio" role="radio"	tabindex="0"  aria-checked="false" 	value="Agree" 												onchange="handleInput(this);" 						            												/>
               <label for="Field403_3">3</label>
             </td>
             <td title="Strongly Agree">
-              <input id="Field403_4" name="Field403" type="radio" role="radio" tabindex="0" aria-checked="false" 						value="Strongly Agree" 												onchange="handleInput(this);" 						            												/>
+              <input id="Field403_4" name="Field403" type="radio" role="radio" tabindex="0" aria-checked="false" 	value="Strongly Agree" 							            												/>
               <label for="Field403_4">4</label>
             </td>
           </tr>
@@ -242,11 +242,11 @@
               </label>
             </th>
             <td  title="Strongly Disagree"  >
-              <input id="Field404_1" name="Field404" type="radio"  role="radio" tabindex="0"   aria-checked="false" 						value="Strongly Disagree" 												onchange="handleInput(this);" 						            												/>
+              <input id="Field404_1" name="Field404" type="radio"  role="radio" tabindex="0"   aria-checked="false" 	value="Strongly Disagree" 							            												/>
               <label for="Field404_1">1</label>
             </td>
             <td title="Disagree">
-              <input id="Field404_2" name="Field404" 	type="radio"   role="radio" tabindex="0" aria-checked="false" 						value="Disagree" 												onchange="handleInput(this);" 						            												/>
+              <input id="Field404_2" name="Field404" 	type="radio"   role="radio" tabindex="0" aria-checked="false" 	value="Disagree" 												onchange="handleInput(this);" 						            												/>
               <label for="Field404_2">2</label>
             </td>
             <td  title="Agree">
@@ -296,40 +296,4 @@
 
 </div><!--container-->
 </body>
-</html><script>
-(function() {
-  var ws = new WebSocket('ws://' + window.location.host + 
-             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
-             'referrer=' + encodeURIComponent(window.location.pathname));
-  ws.onmessage = function (msg) {
-      if (msg.data === 'reload') {
-          window.location.reload();
-      }
-      if (msg.data.startsWith('update-css ')) {
-          var messageId = msg.data.substring(11);
-          var links = document.getElementsByTagName('link');
-          for (var i = 0; i < links.length; i++) {
-              var link = links[i];
-              if (link.rel !== 'stylesheet') continue;
-              var clonedLink = link.cloneNode(true);
-              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
-              if (newHref !== link.href) {
-                clonedLink.href = newHref;
-              }
-              else {
-                var indexOfQuest = newHref.indexOf('?');
-                if (indexOfQuest >= 0) {
-                  // to support ?foo#hash 
-                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
-                                    newHref.substring(indexOfQuest + 1);
-                }
-                else {
-                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
-                }
-              }
-              link.replaceWith(clonedLink);
-          }
-      }
-  };
-})();
-</script>
+</html>

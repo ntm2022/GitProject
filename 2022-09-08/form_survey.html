@@ -1,191 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-  <style>
-    ul{-webkit-padding-start: 0;}
-    li{
-      list-style:none;
-      padding:10px 0px 10px 0px;
-    }
-    h2{
-      background-color:darkred;
-      color:white;
-      padding:10px 0px 10px 10px;
-    }
-    .indam{
-      font-weight:bold;
-    }
-    .xam{
-      background-color:grey;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul {
+            -webkit-padding-start: 0;
+        }
+
+        li {
+            list-style: none;
+            padding: 10px 0 10px 0;
+        }
+
+        h2 {
+            background-color: darkred;
+            color: white;
+            padding: 10px 0 10px 10px;
+        }
+
+        .indam {
+            font-weight: bold;
+        }
+
+        .xam {
+            background-color: grey;
+        }
+    </style>
 </head>
 <body>
 <div id="container">
 
-  <form
-          accept-charset="UTF-8"
-          autocomplete="off"
-          enctype="multipart/form-data"
-          method="post"
-          novalidate
-          action="https://gallery.wufoo.com/forms/?formname=pyej3161l9pt0d&amp;embed=1&amp;embedKey=pyej3161l9pt0d89279#public"
-  >
+    <form
+            accept-charset="UTF-8"
+            autocomplete="off"
+            enctype="multipart/form-data"
+            method="post"
+            novalidate
+            action="https://gallery.wufoo.com/forms/?formname=pyej3161l9pt0d&amp;embed=1&amp;embedKey=pyej3161l9pt0d89279#public"
+    >
 
-    <header id="header" class="info">
-      <h2 class="">Market Research Survey</h2>
-      <div>Please take a few moments to complete this satisfaction survey. </div>
-    </header>
+        <header id="header" class="info">
+            <h2 class="">Market Research Survey</h2>
+            <div>Please take a few moments to complete this satisfaction survey.</div>
+        </header>
 
-    <ul>
+        <ul>
 
-      <li>
-        <label>
-          <span class="indam"> What is your age range?</span>
-        </label>
-        <div>
-          <select>
-            <option value="18-24">18-24</option>
-            <option value="25-34">25-34</option>
-            <option value="35-50" >35-50</option>
-            <option value="50+">50+</option>
-          </select>
-        </div>
-      </li>
+            <li>
+                <label for="select01">
+                    <span class="indam"> What is your age range?</span>
+                </label>
+                <div>
+                    <select id="select01">
+                        <option value="18-24">18-24</option>
+                        <option value="25-34">25-34</option>
+                        <option value="35-50">35-50</option>
+                        <option value="50+">50+</option>
+                    </select>
+                </div>
+            </li>
 
-      <li>
-        <label>
-          <span class="indam"> What is your yearly income range?</span>
-        </label>
-        <div>
-          <select>
-            <option value="$0 - $25,000">$0 - $25,000</option>
-            <option value="$25,001 - $50,000">$25,001 - $50,000</option>
-            <option value="$50,001 - $100,000">$50,001 - $100,000</option>
-            <option value="$100,000+">$100,000+</option>
-          </select>
-        </div>
-      </li>
+            <li>
+                <label for="select02">
+                    <span class="indam"> What is your yearly income range?</span>
+                </label>
+                <div>
+                    <select id="select02">
+                        <option value="$0 - $25,000">$0 - $25,000</option>
+                        <option value="$25,001 - $50,000">$25,001 - $50,000</option>
+                        <option value="$50,001 - $100,000">$50,001 - $100,000</option>
+                        <option value="$100,000+">$100,000+</option>
+                    </select>
+                </div>
+            </li>
 
-      <li>
-        <fieldset>
-          <![if !IE | (gte IE 8)]>
-          <legend>
-            <span class="indam">Gender Identity</span>
-          </legend>
-          <![endif]>
-          <!--[if lt IE 8]>
-          <label>
-              <span class="indam">Gender Identity<</span>>
-          </label>
-          <![endif]-->
-          <div>
+            <li>
+                <fieldset>
+                    <![if !IE | (gte IE 8)]>
+                    <legend>
+                        <span class="indam">Gender Identity</span>
+                    </legend>
+                    <![endif]>
+                    <!--[if lt IE 8]>
+                    <label>
+                        <span class="indam">Gender Identity<</span>>
+                    </label>
+                    <![endif]-->
+                    <div>
 
-  <input  name="gender" type="radio"     class="field radio"     value="Male"/>
-  <label>Male</label>
+                        <input id="male" name="gender" type="radio" class="field radio" value="Male"/>
+                        <label for="male">Male</label>
 
-  <input name="gender"     type="radio"     class="field radio"     value="Female"     tabindex="0"/>
-  <label>Female</label>
+                        <input id="female" name="gender" type="radio" class="field radio" value="Female" tabindex="0"/>
+                        <label for="female">Female</label>
 
-  <input name="gender" type="radio" value="Nonbinary" tabindex="0"/>
-  <label>Nonbinary</label>
-  <input name="gender" type="radio"  value="Other"     tabindex="0"  />
-  <label>Other</label>
-    <input type="text"  maxlength="250"  tabindex="0"/>
-        <label style="display:none;">
-      Maximum of <var id="rangeMaxMsg505">250</var> characters.&nbsp;&nbsp;&nbsp; <em class="currently">Currently Used: <var id="rangeUsedMsg505">0</var> characters.</em>
-    </label>
-        </span>
-          </div>
-        </fieldset>
-      </li>
+                        <input id="nonbinary" name="gender" type="radio" value="Nonbinary" tabindex="0"/>
+                        <label for="nonbinary">Nonbinary</label>
+                        <input id="other" name="gender" type="radio" value="Other" tabindex="0"/>
+                        <label for="other">Other</label>
+                        <input id="txtcurrent" type="text" maxlength="250" tabindex="0"/>
+                        <label for="txtcurrent" style="display:none;">
+                            Maximum of <var id="rangeMaxMsg505">250</var> characters.&nbsp;&nbsp;&nbsp; <em
+                                class="currently">Currently Used: <var id="rangeUsedMsg505">0</var> characters.</em>
+                        </label>
 
-      <li>
-        <fieldset>
-          <![if !IE | (gte IE 8)]>
-          <legend>
-            <span class="indam">Which of the following products have your purchased in the last 2 months. Please check all that apply.</span>
-          </legend>
-          <![endif]>
-          <!--[if lt IE 8]>
-          <label>
-            <span class="indam">Which of the following products have your purchased in the last 2 months. Please check all that apply.</span>
-          </label>
-          <![endif]-->
-          <div>
+                    </div>
+                </fieldset>
+            </li>
+
+            <li>
+                <fieldset>
+                    <![if !IE | (gte IE 8)]>
+                    <legend>
+                        <span class="indam">Which of the following products have your purchased in the last 2 months. Please check all that apply.</span>
+                    </legend>
+                    <![endif]>
+                    <!--[if lt IE 8]>
+                    <label>
+                        <span class="indam">Which of the following products have your purchased in the last 2 months. Please check all that apply.</span>
+                    </label>
+                    <![endif]-->
+                    <div>
 		<span>
-	<input id="Field303" 		name="Field303" 		type="checkbox" 		class="field checkbox" 		value="Product 1" 		tabindex="0" />
+	<input id="Field303" name="Field303" type="checkbox" class="field checkbox" value="Product 1" tabindex="0"/>
 	<label class="choice" for="Field303">
-		<span class="choice__text notranslate" >Product 1</span>
+		<span class="choice__text notranslate">Product 1</span>
 	</label>
 	</span>
-            <span class="subfield">
-	<input type="checkbox" 		class="field checkbox" 		value="Product 2" 		tabindex="0"/>
-	<label>Product 2</label>
-	<input	type="checkbox" 		class="field checkbox" 		value="Product 3" 		tabindex="0"/>
-	<label>
-		<span>Product 3</span>
-					<span class="choice__qty">
-							</span>
-	</label>
+                        <span class="subfield">
+	<input id="chkP2" type="checkbox" class="field checkbox" value="Product 2" tabindex="0"/>
+	<label for="chkP2">Product 2</label>
+	<input id="chkP3" type="checkbox" class="field checkbox" value="Product 3" tabindex="0"/>
+	<label for="chkP3">Product 3</label>
 	</span>
-          </div>
-        </fieldset>
-      </li>
+                    </div>
 
-      <li>
-        <fieldset>
-          <![if !IE | (gte IE 8)]>
-          <legend id="title808" class="desc notranslate">
-            <span class="indam">How often would you use our new product?</span>
-          </legend>
-          <![endif]>
-          <!--[if lt IE 8]>
-          <label id="title808" class="desc">
-            How often would you use our new product?
-          </label>
-          <![endif]-->
-          <div>
-            <input name="Field808" type="hidden" value="" />
-            <span>
-  <input name="Field808"  type="radio" class="field radio"  value="Daily"     tabindex="0"/>
-  <label>Daily</label>
-  <input name="Field808"     type="radio"     class="field radio"     value="Weekly"     tabindex="0"/>
-  <label>Weekly</label>
+                </fieldset>
+            </li>
+
+            <li>
+                <fieldset>
+                    <![if !IE | (gte IE 8)]>
+                    <legend id="title808" class="desc notranslate">
+                        <span class="indam">How often would you use our new product?</span>
+                    </legend>
+                    <![endif]>
+                    <!--[if lt IE 8]>
+                    <label id="title808" class="desc">
+                        How often would you use our new product?
+                    </label>
+                    <![endif]-->
+
+                    <input name="Field808" type="hidden" value=""/>
+                    <span>
+  <input id="radDaily" name="Field808" type="radio" class="field radio" value="Daily" tabindex="0"/>
+  <label for="radDaily">Daily</label>
+  <input id="radWeekly" name="Field808" type="radio" class="field radio" value="Weekly" tabindex="0"/>
+  <label for="radWeekly">Weekly</label>
     </span>
-            <span>
-  <input name="Field808"     type="radio"     class="field radio"     value="Monthly"     tabindex="0"/>
-  <label>Monthly</label>
 
-          </div>
-        </fieldset>
-      </li>
+                    <input id="radMonthly" name="Field808" type="radio" class="field radio" value="Monthly" tabindex="0"/>
+                    <label for="radMonthly">Monthly</label>
 
-      <li>
-        <label>
-          <span class="indam">What would you pay for the new product?</span>
-        </label><br/>
-        <span class="symbol">$</span>
-        <span>
-		<input type="text" size="10" 	tabindex="0"/>
-		<label>Dollars</label>
+
+                </fieldset>
+            </li>
+
+            <li>
+                <label>
+                    <span class="indam">What would you pay for the new product?</span>
+                </label><br/>
+                <span class="symbol">$</span>
+                <span>
+		<input id="txtUSD" type="text" size="10" tabindex="0"/>
+		<label for="txtUSD">Dollars</label>
 	</span>
-        <span class="symbol radix">.</span>
-        <span class="cents">
-		<input	type="text" class="field text nospin" value=""	size="2" maxlength="2" tabindex="0" 						onkeyup="handleInput(this);" 			onchange="handleInput(this);" 			      			/>
-		<label>Cents</label>
+                <span class="symbol radix">.</span>
+                <span class="cents">
+		<input id="txtCent" type="text" value="" size="2" maxlength="2" tabindex="0"/>
+		<label for="txtCent">Cents</label>
 	</span>
-      </li>
+            </li>
 
-      <li>
-        <label>
-          <span class="indam">What features would you like to see in the new product.</span>
-        </label>
+            <li>
+                <label for="txtNewProduct">
+                    <span class="indam">What features would you like to see in the new product.</span>
+                </label>
 
-        <div>
-				<textarea id="Field806"
+                <div>
+				<textarea id="txtNewProduct"
                           name="Field806"
                           class="field textarea medium"
                           spellcheck="true"
@@ -194,105 +198,117 @@
                           placeholder=""
                 ></textarea>
 
-        </div>
+                </div>
 
-      </li>
+            </li>
 
-      <li>
-        <table>
-          <caption>
-            Please rate your level of agreement with the following statements.
-          </caption>
-          <thead>
-          <tr class="xam indam">
-            <th>&nbsp;</th>
-            <td>Strongly Disagree</td>
-            <td>Disagree</td>
-            <td>Agree</td>
-            <td>Strongly Agree</td>
+            <li>
+                <table>
+                    <caption>
+                        Please rate your level of agreement with the following statements.
+                    </caption>
+                    <thead>
+                    <tr class="xam indam">
+                        <th>&nbsp;</th>
+                        <td>Strongly Disagree</td>
+                        <td>Disagree</td>
+                        <td>Agree</td>
+                        <td>Strongly Agree</td>
 
-          </tr>
-          </thead>
-          <tbody>
-          <tr  role="radiogroup" aria-labelledby="Field-403" class="statement403">
-            <th>
-              <label id="Field-403">Our products are priced fairly.</label>
-            </th>
-            <td title="Strongly Disagree">
-              <input id="Field403_1" name="Field403" type="radio" role="radio" tabindex="0" aria-checked="false" 						value="Strongly Disagree" 												onchange="handleInput(this);" 						            												/>
-              <label for="Field403_1">1</label>
-            </td>
-            <td title="Disagree">
-              <input id="Field403_2" name="Field403" type="radio" role="radio" tabindex="0" aria-checked="false" 						value="Disagree" 												onchange="handleInput(this);" 						            												/>
-              <label for="Field403_2">2</label>
-            </td>
-            <td title="Agree">
-              <input id="Field403_3" name="Field403" type="radio" role="radio"	tabindex="0"  aria-checked="false" 						value="Agree" 												onchange="handleInput(this);" 						            												/>
-              <label for="Field403_3">3</label>
-            </td>
-            <td title="Strongly Agree">
-              <input id="Field403_4" name="Field403" type="radio" role="radio" tabindex="0" aria-checked="false" 						value="Strongly Agree" 												onchange="handleInput(this);" 						            												/>
-              <label for="Field403_4">4</label>
-            </td>
-          </tr>
-          <tr  role="radiogroup" aria-labelledby="Field-404"  class="alt statement404" >
-            <th>
-              <label id="Field-404">
-                Our products are high quality.
-              </label>
-            </th>
-            <td  title="Strongly Disagree"  >
-              <input id="Field404_1" name="Field404" type="radio"  role="radio" tabindex="0"   aria-checked="false" 						value="Strongly Disagree" 												onchange="handleInput(this);" 						            												/>
-              <label for="Field404_1">1</label>
-            </td>
-            <td title="Disagree">
-              <input id="Field404_2" name="Field404" 	type="radio"   role="radio" tabindex="0" aria-checked="false" 						value="Disagree" 												onchange="handleInput(this);" 						            												/>
-              <label for="Field404_2">2</label>
-            </td>
-            <td  title="Agree">
-              <input id="Field404_3" name="Field404" type="radio"   role="radio" tabindex="0"  aria-checked="false"	value="Agree" 												onchange="handleInput(this);" 						            												/>
-              <label for="Field404_3">3</label>
-            </td>
-            <td title="Strongly Agree">
-              <input name="Field404" type="radio" role="radio" tabindex="0" aria-checked="false" value="Strongly Agree"/>
-              <label>4</label>
-            </td>
-          </tr>
-          <tr role="radiogroup"  aria-labelledby="Field-405" class="statement405">
-            <th>
-              <label  id="Field-405">You would recommend our product to a friend or coworker. </label>
-            </th>
-            <td title="Strongly Disagree">
-              <input name="Field405" 	type="radio"  role="radio"	tabindex="0"  aria-checked="false" 	value="Strongly Disagree" 												onchange="handleInput(this);" 						            												/>
-              <label>1</label>
-            </td>
-            <td title="Disagree">
-              <input id="Field405_2" name="Field405" type="radio" role="radio"	tabindex="0" aria-checked="false" value="Disagree" 												onchange="handleInput(this);" 						            												/>
-              <label for="Field405_2">2</label>
-            </td>
-            <td title="Agree">
-              <input id="Field405_3" name="Field405" type="radio"  role="radio" tabindex="0"  aria-checked="false" 	value="Agree" 												onchange="handleInput(this);" 						            												/>
-              <label for="Field405_3">3</label>
-            </td>
-            <td title="Strongly Agree">
-              <input name="Field405" type="radio"  role="radio" tabindex="0"   aria-checked="false" value="Strongly Agree" 												onchange="handleInput(this);" 						            												/>
-              <label>4</label>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </li>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr role="radiogroup" aria-labelledby="Field-403">
+                        <th>
+                            <label id="Field-403">Our products are priced fairly.</label>
+                        </th>
+                        <td title="Strongly Disagree">
+                            <input id="radSD" name="Field403" type="radio" role="radio" tabindex="0" aria-checked="false"
+                                   value="Strongly Disagree"/>
+                            <label for="radSD">1</label>
+                        </td>
+                        <td title="Disagree">
+                            <input id="Field403_2" name="Field403" type="radio" role="radio" tabindex="0"
+                                   aria-checked="false" value="Disagree"/>
+                            <label for="Field403_2">2</label>
+                        </td>
+                        <td title="Agree">
+                            <input id="Field403_3" name="Field403" type="radio" role="radio" tabindex="0"
+                                   aria-checked="false" value="Agree"/>
+                            <label for="Field403_3">3</label>
+                        </td>
+                        <td title="Strongly Agree">
+                            <input id="Field403_4" name="Field403" type="radio" role="radio" tabindex="0"
+                                   aria-checked="false" value="Strongly Agree"/>
+                            <label for="Field403_4">4</label>
+                        </td>
+                    </tr>
+                    <tr role="radiogroup" aria-labelledby="Field-404" class="alt statement404">
+                        <th>
+                            <label id="Field-404">
+                                Our products are high quality.
+                            </label>
+                        </th>
+                        <td title="Strongly Disagree">
+                            <input id="Field404_1" name="Field404" type="radio" role="radio" tabindex="0"
+                                   aria-checked="false" value="Strongly Disagree"/>
+                            <label for="Field404_1">1</label>
+                        </td>
+                        <td title="Disagree">
+                            <input id="Field404_2" name="Field404" type="radio" role="radio" tabindex="0"
+                                   aria-checked="false" value="Disagree"/>
+                            <label for="Field404_2">2</label>
+                        </td>
+                        <td title="Agree">
+                            <input id="Field404_3" name="Field404" type="radio" role="radio" tabindex="0"
+                                   aria-checked="false" value="Agree"/>
+                            <label for="Field404_3">3</label>
+                        </td>
+                        <td title="Strongly Agree">
+                            <input id="radSA2" name="Field404" type="radio" role="radio" tabindex="0" aria-checked="false"
+                                   value="Strongly Agree"/>
+                            <label for="radSA2">4</label>
+                        </td>
+                    </tr>
+                    <tr role="radiogroup" aria-labelledby="Field-405" class="statement405">
+                        <th>
+                            <label id="Field-405">You would recommend our product to a friend or coworker. </label>
+                        </th>
+                        <td title="Strongly Disagree">
+                            <input id="radSD1" name="Field405" type="radio" role="radio" tabindex="0" aria-checked="false"
+                                   value="Strongly Disagree"/>
+                            <label for="radSD1">1</label>
+                        </td>
+                        <td title="Disagree">
+                            <input id="Field405_2" name="Field405" type="radio" role="radio" tabindex="0"
+                                   aria-checked="false" value="Disagree"/>
+                            <label for="Field405_2">2</label>
+                        </td>
+                        <td title="Agree">
+                            <input id="Field405_3" name="Field405" type="radio" role="radio" tabindex="0"
+                                   aria-checked="false" value="Agree"/>
+                            <label for="Field405_3">3</label>
+                        </td>
+                        <td title="Strongly Agree">
+                            <input id="radSA" name="Field405" type="radio" role="radio" tabindex="0" aria-checked="false"
+                                   value="Strongly Agree"/>
+                            <label for="radSA">4</label>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </li>
 
-      <li class="buttons ">
-        <div>
-          <input type="hidden" name="currentPage" id="currentPage" />
+            <li class="buttons ">
+                <div>
+                    <input type="hidden" name="currentPage" id="currentPage"/>
 
-          <input id="saveForm" name="saveForm" class="btTxt submit" type="submit" value="Submit" />
+                    <input id="saveForm" name="saveForm" class="btTxt submit" type="submit" value="Submit"/>
 
-        </div>
-      </li>
-    </ul>
-  </form>
+                </div>
+            </li>
+        </ul>
+    </form>
 
 </div><!--container-->
 </body>

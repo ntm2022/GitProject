@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài tập chuyển đổi tiền tệ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body{
+            /*background-color:grey;*/
+        }
+
+        #bangtiente{
+            text-align:center;
+            padding-top:50px;
+        }
+
+        table{
+            background-color:lightgrey;
+            display: inline-block;
+            border: 3px solid darkred;
+            border-radius:5px 5px 5px 5px;
+        }
+
+        h2{
+            background-color: darkred;
+            color: white;
+            padding:10px 0 10px 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="bangtiente">
+
+<table>
+    <caption><h2>EXCHANGE CURRENCY</h2></caption>
+    <thead>
+    <tr>
+        <th>
+            <label for="txtAmount">Amount</label>
+        </th>
+        <th>
+            <label for="selectFrom">From Currency</label>
+        </th>
+        <th>
+            <label for="selectTo">From Currency</label>
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tr>
+        <td>
+            <input id="txtAmount" type="text" required/>
+        </td>
+        <td>
+            <select id="selectFrom" name="selectFrom">
+                <option value="usd">USD</option>
+                <option value="vnd">VND</option>
+            </select>
+        </td>
+        <td>
+            <select id="selectTo">
+                <option value="vnd">VND</option>
+                <option value="usd">USD</option>
+            </select>
+        </td>
+        <td>
+            <input type="submit" value="Exchange" onclick="chuyenDoi();"/>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            <h2 id="result"></h2>
+        </td>
+    </tr>
+</table>
+
+</div>
+</body>
+</html>
+<script>
+    function chuyenDoi() {
+        let amount,  result;
+
+        let from, to, message;
+
+        amount = parseInt(document.getElementById('txtAmount').value);
+
+        from = document.getElementById('selectFrom').value.toString();
+
+        to = document.getElementById('selectTo').value.toString();
+
+        if (!isNaN(amount)) { //xét rỗng txtAmount
+
+            if (from !== to) {
+
+                if (from === 'usd') {
+
+                    result = amount * 23000;
+
+                } else {
+                    result = amount / 23000;
+                }
+
+                message = amount + ' ' + from + ' = ' + result + ' ' + to;
+
+            } else {
+                message = "Bạn đã nhập giá trị chuyển đổi giống nhau!!!";
+            }
+
+
+        } else {
+            message = "Bạn không được bỏ trống SỐ TIỀN!!!";
+        }
+
+        document.getElementById('result').innerHTML = message;
+
+    }
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

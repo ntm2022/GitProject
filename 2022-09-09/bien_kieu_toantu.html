@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài tập Biến-Kiểu dữ liệu-Toán tử</title>
+    <style>
+        h1{
+            background-color:darkred;
+            color:white;
+            padding:10px 0 10px 10px;
+        }
+
+        li{
+            font-size:1em;
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+<h1>
+    Bài tập Biến-Kiểu dữ liệu-Toán tử
+</h1>
+<h2></h2>
+<ol>
+        <li>
+
+            Bài 1: Viết chương trình nhập điểm của một sinh viên cho các môn: Vật lý, Hóa học, và Sinh học. Sau đó hiển
+            thị điểm trung bình và tổng của những điểm này.<br/>
+
+            <button type="button" onclick="averagePoint();">Tính ĐIỂM TRUNG BÌNH</button>
+
+        </li>
+
+
+        <li>
+            Bài 2: Viết chương trình nhập một giá trị là độ 0C (Celsius) và chuyển nó sang độ 0F (Fahrenheit). [Hướng
+            dẫn: C/5 = (F-32)/9] <br/>
+
+            <button type="button" onclick="cTof();">Chuyển độ C => độ F</button>
+        </li>
+
+
+
+
+        <li>
+            Bài 3: Viết chương trình tính diện tích hình tròn<br/>
+
+            <button type="button" onclick="dienTichhinhtron();">Tính diện tích hình tròn</button>
+        </li>
+
+
+
+
+        <li>
+            Bài 4: Viết chương trình chu vi hình tròn<br/>
+
+            <button type="button" onclick="chuVihinhtron();">Tính chu vi hình tròn</button>
+        </li>
+
+</ol>
+</body>
+</html>
+<script>
+function averagePoint(){
+
+    let ly, hoa, sinh, ketqua;
+
+    ly = parseInt(prompt('Nhập điểm LÝ'));
+
+    hoa = parseInt(prompt('Nhập điểm HÓA'));
+
+    sinh = parseInt(prompt('Nhập điểm SINH'));
+
+    ketqua = (ly + hoa + sinh)/3;
+    alert("Điểm trung bình là: " + ketqua);
+}
+
+function cTof(){
+    let doC, doF;
+
+    doC = parseInt(prompt('Nhập độ C'));
+
+    doF = ((doC/5)*9)+32;
+
+    alert(doC + " độ C = " + doF + " độ F.");
+}
+
+function dienTichhinhtron(){
+    const PI = 3.14;
+    let r, dientich;
+
+    r = parseInt(prompt('Nhập bán kính'));
+
+    dientich = PI * Math.pow(r,2);
+
+    alert('Diện tích hình tròn là: ' + dientich);
+}
+
+function chuVihinhtron(){
+    const PI = 3.14;
+    let r, chuvi;
+
+    r = parseInt(prompt('Nhập bán kính'));
+
+    chuvi = 2 * PI * r;
+
+    alert('Chu vi hình tròn là: ' + chuvi);
+}
+
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

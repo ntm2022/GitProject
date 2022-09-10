@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phần mềm máy tính đơn giản</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    #cal{
+      text-align:center;
+      margin:50px 550px 0 550px;
+      padding:40px 0 40px 0;
+    }
+
+    input[text]{
+      height:3em;
+    }
+
+    .nutNho{
+      width:3em;
+      font-weight:bold;
+      color:purple;
+    }
+
+    table{
+      display:inline-block;
+      background-color:pink;
+      border: 2px solid purple;
+      border-radius:5px 5px 5px 5px;
+      box-shadow:5px 5px 5px grey;
+    }
+
+    h2{
+      /*color:white;*/
+    }
+
+    #result{
+      font-size:2em;
+      color:purple;
+    }
+  </style>
+</head>
+<body>
+<div id="cal">
+  <table>
+    <caption><h3>Simple Calculator</h3></caption>
+    <tr>
+      <td colspan="2"><input id="txtNo1" type="text" placeholder="Nhập số thứ 1..." pattern="[0-9]" title="Chỉ đươc nhập số 0-9" required/></td>
+      <td colspan="2"><input id="txtNo2" type="text" placeholder="Nhập số thứ 2..." pattern="[0-9]" title="Chỉ đươc nhập số 0-9" required/></td>
+    </tr>
+
+    <tr>
+      <td><input id="nutCong" class="nutNho" type="button" value="+" onclick="cong();"/></td>
+      <td><input id="nutTru" class="nutNho" type="button" value="-" onclick="tru();"/></td>
+      <td><input id="nutNhan" class="nutNho" type="button" value="*" onclick="nhan();"/></td>
+      <td><input id="nutChia" class="nutNho" type="button" value="/" onclick="chia();"/></td>
+    </tr>
+
+    <tr>
+      <td id="result" colspan="4"></td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>
+<script>
+  function cong(){
+    let first, second, sum;
+
+    first = parseInt(document.getElementById('txtNo1').value);
+
+    second = parseInt(document.getElementById('txtNo2').value);
+
+    if(!isNaN(first)&&!isNaN(second)){
+      sum = first + second;
+
+      document.getElementById('result').innerHTML = sum;
+    }else {document.getElementById('result').innerHTML = 'Bạn phải nhập dữ liệu vào 02 ô!!!';}
+  }
+
+  function tru(){
+    let first, second, subtract;
+
+    first = parseInt(document.getElementById('txtNo1').value);
+
+    second = parseInt(document.getElementById('txtNo2').value);
+
+    if(!isNaN(first)&&!isNaN(second)){
+      subtract = first - second;
+
+      document.getElementById('result').innerHTML = subtract;
+    }else {document.getElementById('result').innerHTML = 'Bạn phải nhập dữ liệu vào 02 ô!!!';}
+  }
+
+  function nhan(){
+    let first, second, multi;
+
+    first = parseInt(document.getElementById('txtNo1').value);
+
+    second = parseInt(document.getElementById('txtNo2').value);
+
+    if(!isNaN(first)&&!isNaN(second)){
+      multi = first * second;
+
+      document.getElementById('result').innerHTML = multi;
+    }else {document.getElementById('result').innerHTML = 'Bạn phải nhập dữ liệu vào 02 ô!!!';}
+  }
+
+  function chia(){
+    let first, second, division;
+
+    first = parseInt(document.getElementById('txtNo1').value);
+
+    second = parseInt(document.getElementById('txtNo2').value);
+
+    if(!isNaN(first)&&!isNaN(second)){
+
+      if(second!=0){
+        division= first / second;
+
+        document.getElementById('result').innerHTML = division;
+
+      }else{document.getElementById('result').innerHTML = 'Số thứ 02 phải khác 0!!!';}
+
+    }else {document.getElementById('result').innerHTML = 'Bạn phải nhập dữ liệu vào 02 ô!!!';}
+  }
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

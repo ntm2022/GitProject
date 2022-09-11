@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lịch</title>
+    <style>
+        #calendar{}
+        h2 {
+            color: darkblue;
+        }
+
+        .chudo {
+            color: darkred;
+        }
+
+        .chuxanh {
+            color: darkblue;
+        }
+
+        .nendo {
+            color: white;
+            background-color: darkred;
+        }
+
+        .nenxanh {
+            color: white;
+            background-color: darkblue;
+        }
+
+        .nenvang {
+            color: white;
+            background-color: gold;
+        }
+
+        table {
+            text-align: center;
+            font-family: Arial;
+            padding: 3px 3px 3px 3px;
+            border-collapse: collapse;
+            box-shadow: 5px 5px 5px grey;
+        }
+
+        .delborder {
+            border: none;
+        }
+
+        th {
+            border: 1px solid white;
+            padding: 3px 3px 3px 3px;
+        }
+
+        td {
+            padding: 3px 3px 3px 3px;
+            font-size: 1em;
+            border: 2px solid lightgray;
+        }
+
+        .chunho {
+            font-size: 0.5em;
+        }
+
+        .dam {
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+<div id="calendar">
+    <table>
+        <caption><h2>Tháng 10 - October</h2></caption>
+        <tr>
+            <th class="nendo">C.Nhật</th>
+            <th class="nenvang">T.Hai</th>
+            <th class="nenvang">T.Ba</th>
+            <th class="nenvang">T.Tư</th>
+            <th class="nenvang">T.Năm</th>
+            <th class="nenvang">T.Sáu</th>
+            <th class="nenxanh">T.Bảy</th>
+        </tr>
+        <tr>
+            <td class="chudo delborder">Sun</td>
+            <td class="delborder">Mon</td>
+            <td class="delborder">Tue</td>
+            <td class="delborder">Wed</td>
+            <td class="delborder">Thur</td>
+            <td class="delborder">Fri</td>
+            <td class="chuxanh delborder">Sat</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>1<sub>13</sub></td>
+            <td>2<sub>14</sub></td>
+            <td class="chuxanh dam">3<sub class="chunho">15</sub></td>
+        </tr>
+        <tr>
+            <td class="chudo dam">4<sub class="chunho">16</sub></td>
+            <td>5<sub>17</sub></td>
+            <td>6<sub>18</sub></td>
+            <td>7<sub>19</sub></td>
+            <td>8<sub>20</sub></td>
+            <td>9<sub>21</sub></td>
+            <td class="chuxanh dam">10<sub class="chunho">22</sub></td>
+        </tr>
+        <tr>
+            <td class="chudo dam">11<sub class="chunho">23</sub></td>
+            <td>12<sub class="chunho">24</sub></td>
+            <td>13<sub class="chunho">25</sub></td>
+            <td>14<sub class="chunho">26</sub></td>
+            <td>15<sub class="chunho">27</sub></td>
+            <td>16<sub class="chunho">28</sub></td>
+            <td class="chuxanh dam">17<sub class="chunho">29</sub></td>
+        </tr>
+        <tr>
+            <td class="chudo dam">18<sub class="chunho">1.9</sub></td>
+            <td>19<sub class="chunho">2</sub></td>
+            <td>20<sub class="chunho">3</sub></td>
+            <td>21<sub class="chunho">4</sub></td>
+            <td>22<sub class="chunho">5</sub></td>
+            <td>23<sub class="chunho">6</sub></td>
+            <td class="chuxanh dam">24<sub class="chunho">7</sub></td>
+        </tr>
+        <tr>
+            <td class="chudo dam">25<sub class="chunho">8</sub></td>
+            <td>26<sub class="chunho">9</sub></td>
+            <td>27<sub class="chunho">10</sub></td>
+            <td>28<sub class="chunho">11</sub></td>
+            <td>29<sub class="chunho">12</sub></td>
+            <td>30<sub class="chunho">13</sub></td>
+            <td class="chuxanh dam">31<sub class="chunho">14</sub></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

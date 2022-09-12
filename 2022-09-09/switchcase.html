@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thực hành SWITCH CASE</title>
+</head>
+<body>
+<h2>Bài 1: Viết lại cấu trúc if sau thành cấu trúc switch</h2>
+<pre>
+    let browser = prompt("Enter browser name!")
+    if (browser == 'Edge') {
+    alert("You've got the Edge!");
+    } else if (browser == 'Chrome' || browser == 'Firefox' || browser == 'Safari' || browser == 'Opera') {
+    alert('Okay we support these browsers too');
+    } else {
+    alert('We hope that this page looks ok!');
+    }
+</pre>
+
+<button onclick="bai1();">Lets GO!!!</button>
+
+<h2>Bài 2: Viết lại cấu trúc if sau thành cấu trúc switch</h2>
+<pre>
+  let a = prompt('a?', '');
+
+if (a == 0) {
+    alert(0);
+}
+
+if (a == 1) {
+    alert(1);
+}
+
+if (a == 2 || a == 3) {
+    alert('2,3');
+}
+</pre>
+<button onclick="bai2();">Lets GO!!!</button>
+
+
+<h2>Bài 3: Sử dụng cấu trúc if…else, nhập vào một số, kiểm tra giá trị của số nhập vào</h2>
+<pre>
+Nếu số đó lớn hơn 0 hiển thị 1
+
+Còn lại nếu số đó nhỏ hơn 0 thì hiển thị -1
+
+Còn lại hiển thị 0
+</pre>
+<button onclick="bai3();">Lets GO!!!</button>
+
+</body>
+</html>
+
+<script>
+    function bai1(){
+        let browser, message;
+
+        browser = prompt("Enter browser name!").toString();
+
+        if(browser!==""){
+            switch (browser){
+                case 'Edge':
+                    message = "You've got the Edge!";
+                    break;
+                case 'Chrome':
+                    message = 'Okay we support these browsers too';
+                    break;
+                case 'Firefox':
+                    message = 'Okay we support these browsers too';
+                    break;
+                case 'Safari':
+                    message = 'Okay we support these browsers too';
+                    break;
+                case 'Opera':
+                    message = 'Okay we support these browsers too';
+                    break;
+                default:
+                    message = 'We hope that this page looks ok!'
+                    break;
+            }
+        }else {
+            message = "Bạn không được bỏ trống!!!";
+        }
+
+        alert(message);
+
+        /*console.log(browser);
+
+        console.log(message);*/
+    }
+
+    function bai2(){
+        let a, message;
+
+        a = parseInt(prompt('a?', ''));
+
+        if(!isNaN(a)){
+            switch (a){
+                case 0:
+                    message = "0";
+                    break;
+                case 1:
+                    message = "1";
+                    break;
+                case 2:
+                    message = "2,3";
+                    break;
+                case 3:
+                    message = "2,3";
+                    break;
+                default:
+                    message = "";
+                    break;
+            }
+        }else{
+            message = "Bạn không được bỏ trống!!!";
+        }
+
+        /*console.log(a);
+        console.log(message);*/
+
+        alert(message);
+    }
+
+    function bai3(){
+        let message, a;
+
+        a = parseInt(prompt('Nhập số a'));
+
+        if(!isNaN(a)){
+            if(a>0){
+                message = "1";
+            }else if(a<0){
+                message = "-1";
+            }else {
+                message = "0";
+            }
+        }else{
+            message = "Bạn không được bỏ trống!!!";
+        }
+
+        /*console.log(a);
+        console.log(message);*/
+
+        alert(message);
+    }
+
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

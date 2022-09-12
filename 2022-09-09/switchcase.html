@@ -46,7 +46,9 @@ Còn lại nếu số đó nhỏ hơn 0 thì hiển thị -1
 
 Còn lại hiển thị 0
 </pre>
-<button onclick="bai3();">Lets GO!!!</button>
+<button onclick="bai3();">Lets GO!!!</button><br/><br/>
+
+<button onclick="bai3SW();">Lets GO SWITCH CASE!!!</button>
 
 </body>
 </html>
@@ -134,6 +136,31 @@ Còn lại hiển thị 0
                 message = "-1";
             }else {
                 message = "0";
+            }
+        }else{
+            message = "Bạn không được bỏ trống!!!";
+        }
+
+        /*console.log(a);
+        console.log(message);*/
+
+        alert(message);
+    }
+
+    function bai3SW(){
+        let message, a;
+
+        a = parseInt(prompt('Nhập số a'));
+
+        if(!isNaN(a)){
+            switch (a){
+                case 0:
+                    message = "0";
+                    break;
+                default:
+                    /*message = a>0?"1":"-1";*/
+                    message = a / Math.abs(a) + ""; //mẫu số luôn luôn dương
+                    break;
             }
         }else{
             message = "Bạn không được bỏ trống!!!";

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm tra năm nhuận</title>
+</head>
+<body>
+<ul>
+    <li>
+        Những năm chia hết cho 4 mà không chia hết cho 100 là năm nhuận.
+    </li>
+    <li>
+        Những năm chia hết đồng thời cho 100 và 400 là năm nhuận
+    </li>
+    <li>
+        Những năm chia hết cho 100 mà không chia hết cho 400 thì KHÔNG PHẢI là năm nhuận
+    </li>
+</ul>
+
+<h2>TEST</h2>
+<ul>
+    <li>12: năm nhuận</li>
+    <li>13: năm không nhuận</li>
+    <li>1000: năm không nhuận</li>
+    <li>2000: năm nhuận</li>
+</ul>
+</body>
+</html>
+<script>
+    let year, isLeapYear;
+
+    //year = 2000;
+    year = parseInt(prompt('Nhập năm kiểm tra'));
+
+    if (!isNaN(year)) {
+
+        if ((year % 4 == 0 && year % 100 != 0) || (year % 100 == 0 && year % 400 == 0)) {
+            isLeapYear = true;
+        } else if (year % 100 == 0 && year % 400 != 0) {
+            isLeapYear = false;
+        } else {
+            isLeapYear = false;
+        }
+
+    }
+
+    isLeapYear?document.write('Năm nhuận'):document.write('Năm k nhuận');
+    //console.log(isLeapYear);
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thực hành IFElseIF</title>
+</head>
+<body>
+<h2>Viết chương trình kiểm tra đăng nhập hệ thống của người dùng theo yêu cầu sau</h2>
+
+Yêu cầu người dùng nhập tên từ bàn phím.
+<ul>
+    <li>Nếu tên nhập vào là Admin thì yêu cầu nhập mật khẩu.</li>
+    <li>Nếu mật khẩu là TheMaster thì in ra chuỗi Welcome.</li>
+    <li>Nếu mật khẩu nhập vào là null in ra chuỗi Canceled.</li>
+    <li>Còn lại in ra chuỗi Wrong password.</li>
+    <li>Nếu tên nhập vào là null in ra chuỗi canceld.</li>
+    <li>Còn lại in ra chuỗi “I don’t know you"</li>
+</ul>
+</body>
+</html>
+<script>
+let username, password, message;
+
+username = prompt('Nhập tên').toString();
+
+if(username=='admin'){
+    password = prompt('Nhập password').toString();
+    if(password=='TheMaster'){
+        message = 'welcome';
+    }else if (password === "") {
+        message = 'canceled';
+    }else {
+        message = 'Wrong password';
+    }
+}else {
+    message = "I don't know you";
+}
+
+printMessage(username, password, message);
+
+function printMessage(username, password, message){
+    document.write('username:' + username + '<br/>');
+    document.write('password:' + password + '<br/>');
+    document.write('<h2>' + message + '</h2>');
+};
+/*console.log(username);
+console.log(password);
+console.log(message);*/
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

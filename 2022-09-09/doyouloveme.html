@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phần mềm Do You Love Me</title>
+    <style>
+        h3{
+            color:darkred;
+        }
+
+        #bailam{
+            text-align:center;
+            display:block;
+        }
+
+    </style>
+</head>
+<body>
+
+<h2>MÔ TẢ TÍNH NĂNG</h2>
+<ul>
+    <li>Khi người dùng click chuột vào nút YES thì sẽ hiển thị thông báo: "<3"</li>
+    <li>Khi người dùng di chuột lên nút NO thì nút NO sẽ nhảy sang một vị trí khác ngẫu nhiên trên màn hình. Kết quả là
+        người dùng không thể click được chuột vào nút NO.
+    </li>
+</ul>
+
+<h2>HƯỚNG DẪN</h2>
+<ul>
+    <li>Sử dụng các sự kiện onclick và onmouseover</li>
+    <li>Sử dụng hàm Math.random() để sinh ra các số ngẫu nhiên</li>
+    <li>Sử dụng các thuộc tính window.innerHeight và window.innerWidth để lấy chiều cao và chiều rộng của trình duyệt
+    </li>
+    <li>Sử dụng hàm document.getElementById để lấy về nút NO</li>
+    <li>Sử dụng thuộc tính style.left và style.top để thay đổi vị trí của nút NO</li>
+</ul>
+<hr>
+<h2>BÀI LÀM</h2>
+<div id="bailam">
+<h3>Do you love me?</h3>
+    <div id="nut">
+        <button id="btnYes">YES</button>
+        <button id="btnNo" style="color:red;position:absolute; left:285px; top:235px;">No</button>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    let btnYes, btnNo;
+
+    btnYes = document.getElementById('btnYes');
+
+    btnNo = document.getElementById('btnNo');
+
+    btnYes.addEventListener('click',noiLoiYeu);
+
+    btnNo.addEventListener('mouseover',boChay);
+
+    function noiLoiYeu(){
+        message = "<3";
+        alert(message);
+        console.log(message);
+    }
+
+    function boChay(){
+        var x = Math.round(Math.random() * window.innerHeight); //có thể bỏ hàm round làm tròn TỌA ĐỘ cũng được
+
+        var y = Math.round(Math.random() * window.innerWidth);
+
+        btnNo.style.left = x + 'px';
+
+        btnNo.style.top = y + 'px';
+
+        console.log(x);
+    }
+
+    console.log(message);
+
+    console.log(btnNo);
+
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

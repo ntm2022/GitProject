@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Good Fast Cheap</title>
+</head>
+<body>
+<form>
+  <label for = "chkGood">Good</label><input type="checkbox" id="chkGood" />
+  <br/><br/>
+  <label for = "chkFast">Fast</label><input type="checkbox" id="chkFast" />
+  <br/><br/>
+  <label for = "chkCheap">Cheap</label><input type="checkbox" id="chkCheap" />
+</form>
+</body>
+</html>
+Nếu Good và Fast thì không Cheap.
+Nếu Cheap thì Fast nhưng không Good.
+<script>
+  let chkGood, chkFast, chkCheap;
+
+  chkGood = document.getElementById("chkGood");
+
+  chkFast = document.getElementById("chkFast");
+
+  chkCheap = document.getElementById("chkCheap");
+
+  chkGood.addEventListener('change',doGoodFastCheap);
+
+  chkFast.addEventListener('change',doGoodFastCheap);
+
+  chkCheap.addEventListener('change',doGoodFastCheap);
+
+  function doGoodFastCheap(){
+
+    if(chkGood.checked && chkFast.checked){
+      chkCheap.checked = false;
+    }else if(chkCheap.checked){
+      chkFast.checked = true;
+      chkGood.checked = false;
+    }
+  }
+
+  console.log(chkGood.checked);
+
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

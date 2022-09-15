@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Số nguyên tố - PRIME</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  //Định nghĩa số nguyên tố là số chỉ chia hết cho chính nó và 1 (ngoại trừ số 1 và 2 ra)
+  let prime, i;
+
+  prime = 0;
+  i = 3;
+
+  /*isPrime(i)?alert(i + " là so nguyên tố"):alert(i+ " không phải số nguyên tố!!");*/
+  //Chạy dãy số từ 3 trở đi
+
+  do{
+    //kiểm tra số thứ i có phải là isPrime
+
+    if(isPrime(i)){
+      ++prime;
+      document.write(i + " ");
+      i++;
+    }else{i++;}
+
+  //Vòng lặp này dừng lại khi prime = 20 (in 20 số nguyên tố đầu tiên
+  }while(prime<20);
+
+  document.write("<br>" + prime +"</br>");
+
+  function isPrime(a){
+    let j, result;
+
+    result = true;
+
+    for(j=2;j<a;j++){
+
+      if(a%j===0){
+        result = false;
+      }
+
+    }
+
+    return result;
+
+  }
+
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cấu trúc điều kiện 01</title>
+    <style>
+        h1 {
+            color: darkred;
+        }
+    </style>
+</head>
+<body>
+
+<h3 id="bai1">Bài 1: Nhập vào hai số a và b, và kiểm tra xem a có chia hết cho b hay không</h3>
+<form>
+    <label for="txtA">Số A:</label>
+    <input type="text" id="txtA" placeholder="Nhập số a..."/>
+    <br/><br/>
+    <label for="txtB">Số B:</label>
+    <input type="text" id="txtB" placeholder="Nhập số b..."/>
+    <br/><br/>
+    <input type="button" id="btnBai1" value="Kiểm tra CHIA HẾT"/>
+
+</form>
+
+<h3 id="bai2">Bài 2: Nhập tuổi và in ra kết quả nếu tuổi học sinh đó không đủ điều kiện vào học lớp 10.</h3>
+<form>
+    <label for="txtAge">Tuổi:</label>
+    <input type="text" id="txtAge" placeholder="Nhập tuổi..."/>
+
+    <input type="button" id="btnBai2" value="Kiểm tuổi lớp 10"/>
+</form>
+
+
+<h3 id="bai3">Bài 3: Nhập một số nguyên bất kỳ và in kết quả ra màn hình để nói cho người dùng biết số đó là lớn hay nhỏ
+    hơn 0</h3>
+<form>
+    <label for="txtSoN">N=</label>
+    <input type="text" id="txtSoN" placeholder="Nhập số nguyên bất kỳ..." pattern="[0-9]"/>
+    <br/><br/>
+    <input type="button" id="btnBai3" value="Kiểm tra số nguyên dương"/>
+</form>
+
+
+<h3 id="bai4">Bài 4: Nhập 3 số nguyên và tìm giá trị lớn nhất của ba số nguyên đó</h3>
+<form>
+    <label for="txtSo1">Số 01</label>
+    <input type="text" id="txtSo1" placeholder="Nhập số thứ 1..."/>
+    <br/><br/>
+
+    <label for="txtSo2">Số 02</label>
+    <input type="text" id="txtSo2" placeholder="Nhập số thứ 2..."/>
+    <br/><br/>
+
+    <label for="txtSo3">Số 03</label>
+    <input type="text" id="txtSo3" placeholder="Nhập số thứ 3..."/>
+    <br/><br/>
+
+    <input type="button" id="btnBai4" value="Tìm MAX"/>
+</form>
+
+<h3 id="bai5">Bài 5: Xếp hạng học lực của học sinh dựa trên các điểm bài kiểm tra, điểm thi giữa kỳ, điểm thi cuối
+    kỳ</h3>
+<form>
+    <label for="txtKiemTra">Điểm kiểm tra</label>
+    <input type="text" id="txtKiemTra" placeholder="Nhập điểm bài kiểm tra..."/>
+    <br/><br/>
+
+    <label for="txtGiuaKy">Điểm giữa kỳ</label>
+    <input type="text" id="txtGiuaKy" placeholder="Nhập điểm giữa kỳ..."/>
+    <br/><br/>
+
+    <label for="txtCuoiKy">Điểm cuối kỳ</label>
+    <input type="text" id="txtCuoiKy" placeholder="Nhập điểm cuối kỳ..."/>
+    <br/><br/>
+
+    <input type="button" id="btnBai5" value="Xếp hạng"/>
+</form>
+
+<h3 id="bai6">Bài 6: Tính hoa hồng nhận được tuỳ theo mức doanh số bán hàng</h3>
+<form>
+    <label for="txtDoanhSo">Doanh số</label>
+    <input type="text" id="txtDoanhSo" placeholder="Nhập doanh số..."/>
+    <br/><br/>
+
+    <label for="txtHoaHong">% hoa hồng</label>
+    <input type="text" id="txtHoaHong" placeholder="Nhập hoa hồng..."/>
+    <br/><br/>
+
+    <input type="button" id="btnBai6" value="Tính hoa hồng"/>
+</form>
+
+<h3 id="bai7">Bài 7: Tính cước điện thoại cho một hộ gia đình với các thông số đã cho</h3>
+<form>
+    <label for="txtSoGio">Số giờ thoại trong tháng</label>
+    <input type="text" id="txtSoGio" placeholder="Nhập số giờ..."/>
+    <br/><br/>
+
+    <input type="button" id="btnBai7" value="Tính cước điện thoại"/>
+</form>
+
+<h1 id="result"></h1>
+</body>
+</html>
+<script>
+    //Khai báo nút
+    let result, btnBai1, btnBai2, btnBai3, btnBai4;
+
+    result = document.getElementById("result");
+
+    btnBai1 = document.getElementById("btnBai1");
+
+    btnBai2 = document.getElementById("btnBai2");
+
+    btnBai3 = document.getElementById("btnBai3");
+
+    btnBai4 = document.getElementById("btnBai4");
+
+    btnBai5 = document.getElementById("btnBai5");
+
+    btnBai6 = document.getElementById("btnBai6");
+
+    btnBai7 = document.getElementById("btnBai7");
+
+    //khi bấm nút btnBai1 thì làm HÀNH ĐỘNG
+    btnBai1.addEventListener('click', functionBai1);
+
+    //Dinh nghia hàm
+    function functionBai1() {
+        let a, b, message;
+        //lấy dữ liệu từ ô txtA
+        a = parseInt(document.getElementById("txtA").value);
+
+        //lấy dữ liệu từ ô txtB
+        b = parseInt(document.getElementById("txtB").value);
+
+        //Nếu checkInput không qua thì gán message "Dữ liệu k hợp lệ" , nếu qua thì check chiaHet và gán thông báo message
+        if (!checkInput2(a, b)) {
+            message = "Dữ liệu không hợp lệ!!!";
+        } else {
+            message = chiaHet(a, b) ? "Chia hết" : "K chia hết";
+        }
+        //xuất ra màn hình câu message
+        result.innerHTML = message;
+    }
+
+    function checkInput1(a) {
+        return !isNaN(a);
+        //phải kiểm tra pattern và cắt ký tự khoảng trắng
+    }
+
+    function checkInput2(a, b) {
+        return !isNaN(a) && !isNaN(b);
+        //phải kiểm tra pattern và cắt ký tự khoảng trắng
+    }
+
+    function checkInput3(a, b, c) {
+        return !isNaN(a) && !isNaN(b) && !isNaN(c);
+        //phải kiểm tra pattern và cắt ký tự khoảng trắng
+    }
+
+    function chiaHet(a, b) {
+        return (a % b) === 0;
+    }
+
+    btnBai2.addEventListener('click', functionBai2);
+
+    function functionBai2() {
+        let age, message;
+        //lấy dữ liệu từ txtAge
+        age = parseInt(document.getElementById("txtAge").value);
+
+        //checkInput k qua thì gán message="Dữ liệu k hợp lệ", nếu qua thì kiểm tuổi >= 16 hay k? qua thì gán message
+        if (!checkInput1(age)) {
+            message = "Dữ liệu không hợp lệ!!!";
+        } else {
+            message = age >= 16 ? "Đủ tuổi học lớp 10" : "Chưa đủ tuổi!!!";
+        }
+
+        result.innerHTML = message;
+    }
+
+    btnBai3.addEventListener('click', functionBai3);
+
+    function functionBai3() {
+        let n, message;
+
+        //lấy dữ liệu từ ô txtSoN
+        n = parseInt(document.getElementById("txtSoN").value);
+
+        //checkInput nếu không qua gán message="Dữ liệu k hợp lệ, nếu qua thì check > 0 hay không
+        if (!checkInput1(n)) {
+            message = "Dữ liệu không hợp lệ";
+        } else {
+            message = n > 0 ? "Lớn hơn 0" : "Nhỏ hơn 0"; //trường hợp bằng 0 chưa xét???
+        }
+
+        //in message ra thẻ result
+        result.innerHTML = message;
+    }
+
+    //Khi bấm nút btnBai4
+    btnBai4.addEventListener('click', functionBai4);
+
+    function functionBai4() {
+        let n1, n2, n3, message;
+
+        //lấy dữ liệu từ txtSo1
+        n1 = parseInt(document.getElementById("txtSo1").value);
+        //lấy dữ liệu từ txtSo2
+        n2 = parseInt(document.getElementById("txtSo2").value);
+        //lấy dữ liệu từ txtSo3
+        n3 = parseInt(document.getElementById("txtSo3").value);
+
+        //checkInput3(n1, n2, n3) nếu không qua gán mesage="Dữ liệu không hợp lệ!", nếu qua max = timMax(n1,n2,n3)
+        if(!checkInput3(n1, n2, n3)){
+            message = "Dữ liệu không hợp lệ!";
+        }else{
+            message = timMax(n1, n2, n3);
+        }
+        //hàm timMax(a1,a2,a3)
+        function timMax(a1,a2,a3){
+            //khởi tạo max = 0
+            let max = 0;
+
+            //so sánh n1 với max, nếu n1>max thì max=n1
+            if(n1>max){max = n1;}
+            //so sánh n2 với max, nếu n2>max thì max=n2
+            if(n2>max){max = n2;}
+            //so sánh n3 với max, nếu n3>max thì max=n2
+            if(n3>max){max = n3;}
+            //return max
+            return max;
+        }
+
+        //in dữ liệu max ra thẻ result
+        result.innerHTML = message;
+
+    }
+
+    //Khi bấm nút bài 5
+    btnBai5.addEventListener("click", functionBai5);
+
+    function functionBai5() {
+        let kiemTra, giuaKy, cuoiKy, message;
+        //lấy dữ liệu từ txtKiemTra
+        kiemTra = parseInt(document.getElementById("txtKiemTra").value);
+        //lấy dữ liệu từ txtGiuaKy
+        giuaKy = parseInt(document.getElementById("txtGiuaKy").value);
+        //lấy dữ liệu từ txtCuoiKy
+        cuoiKy = parseInt(document.getElementById("txtCuoiKy").value);
+        //checkInput3(kiemtra, giuaKy, cuoiKy) nếu không qua gán message="Dữ liệu không hợp lệ!",
+
+        //nếu qua message = hocLuc(kiemtra, giuaKy, cuoiKy)
+        if(!checkInput3(kiemTra, giuaKy, cuoiKy)){
+            message = "Dữ liệu không hợp lệ!";
+        }else{
+            message = hocLuc(kiemTra, giuaKy, cuoiKy);
+        }
+
+        //in dữ liệu message ra thẻ result
+        result.innerHTML = message;
+        //hàm hocLuc(a1, a2, a3)
+        function hocLuc(a1, a2, a3){
+            //trungBinh = (a1+a2+a3)/3;
+            let trungBinh = (a1+a2+a3)/3;
+
+            //trungBinh<5 là KÉM
+            if(trungBinh<5){ return "KÉM";}
+
+            //5<=trungBinh<7 là "TRUNG BÌNH"
+            if(trungBinh<7){return "TRUNG BÌNH";}
+
+            //7<=trungbinh<9 là "KHÁ"
+            if(trungBinh>=7&&trungBinh<9){return "KHÁ";}
+
+            //9<=trungbinh là "GIỎI"
+            if(trungBinh>=9){return "GIỎI";}
+        }
+
+    }
+
+    //Khi bấm nút bài 6
+    btnBai6.addEventListener("click", functionBai6);
+
+    function functionBai6(){
+        let doanhSo, hoaHong, message;
+        //lấy dữ liệu từ txtDoanhSo
+        doanhSo = parseInt(document.getElementById("txtDoanhSo").value);
+        //lấy dữ liệu từ txtHoaHong
+        hoaHong =  parseInt(document.getElementById("txtHoaHong").value);
+        //checkInput2(doanhSo, hoaHong) nếu k qua gán result ="Dữ liệu không hợp lệ"
+        if(!checkInput2(doanhSo, hoaHong)){
+            message ="Dữ liệu không hợp lệ";
+        }else{//nếu qua result = Math.round(hoaHong*doanhSo/100);
+            message = Math.round(hoaHong*doanhSo/100);
+        }
+
+        result.innerHTML = message;
+        //xuất dữ liệu result ra thẻ result
+    }
+
+    //Khi bấm nút bài 7
+    btnBai7.addEventListener("click", functionBai7);
+
+    function functionBai7() {
+        let soGio, donGia, message;
+
+        donGia = 30; //đơn giá 1s thoại
+
+        //lấy dữ liệu từ txtSoGio (đơn vị là giây)
+        soGio = parseInt(document.getElementById("txtSoGio").value);
+        //checkInput(soGio) nếu k qua gán result="Dữ liệu k hợp lệ!!!"
+        if(!checkInput1(soGio)){
+            message = "Dữ liệu k hợp lệ!!!";
+        }else{//nếu qua result = soGio * donGia;
+            message = soGio * donGia;
+        }
+
+        result.innerHTML = message;
+        //xuất result ra thẻ result
+    }
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

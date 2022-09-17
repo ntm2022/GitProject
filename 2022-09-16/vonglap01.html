@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vòng lặp 01</title>
+    <style>
+        .baitap{
+            font-size:1.5em;
+        }
+    </style>
+</head>
+<body>
+<div class="baitap">Bài 1: Sử dụng vòng lặp để đếm từ 1 đến 100. Khi số là 99, hiển thị hộp thoại thông báo là đã hoàn thành.</div>
+<script>
+    /*let i;
+    for(i=1;i<100;i++){
+        document.write(i + " ");
+    }
+    document.write("Đã hoàn thành!!!");*/
+</script>
+<div class="baitap">Bài 2: Sử dụng hàm prompt() để lấy thông tin nhiệt độ hiện tại được nhập bởi người truy cập. Nếu nhiệt độ nhập vào
+    trên 100, yêu cầu người dùng giảm nhiệt độ. Nếu nhiệt độ dưới 20, yêu cầu người dùng tăng nhiệt độ.</div>
+
+<form>
+    <label for="txtNhietDo">Nhiệt độ</label>
+    <input type="text" id="txtNhietDo" placeholder="Nhập nhiệt độ..."/>
+
+    <input type="button" id="btnBai2" value="Kiểm tra nhiệt độ"/>
+</form>
+
+<script>
+    let btnBai2;
+
+    btnBai2 = document.getElementById("btnBai2");
+
+    //khi bấm vào nút btnBai2 thì HÀNH ĐỘNG
+    btnBai2.addEventListener("click",function(){
+        let nhietDo;
+
+        //lấy dữ liệu từ txtNhietDo
+        nhietDo = parseFloat(document.getElementById("txtNhietDo").value);
+
+        //kiểm tra nhietDo
+        if(!isNaN(nhietDo)){
+            if(nhietDo>100){
+                document.write("Giảm nhiệt độ!");
+            }else if(nhietDo<20){
+                document.write("Tăng nhiệt độ!");
+            }
+
+        }else{document.write("Dữ liệu k hợp lệ!");}
+    });
+
+</script>
+<div class="baitap">Bài 3: Hiển thị ra 20 số trong dãy fibonacci đầu tiên.</div>
+<form>
+    <input type="button" id="btnBai3" value="In 20 Fibonacci"/>
+</form>
+<script>
+/*    let btnBai3;
+
+    btnBai3 = document.getElementById("btnBai3");
+
+    //Khi bấm nút btnBai3 thì HÀNH ĐỘNG
+    btnBai3.addEventListener("click",functionBai3);
+
+    function functionBai3() {
+        //Fibonacci là dãy số bắt đầu từ 0, 1, 2 ...số thứ n = tổng 02 số đứng trước nó.
+        let i, f, sothu1, sothu2, daySo, isFibo;
+
+        f = 3; //vì mặc định 03 số đầu của dãy FIBO là 0,1,2 đã bị bỏ qua
+
+        i = 3; //i là số HIỆN TẠI cần xét có phải số FIBO hay không theo thứ tự sau: soThu1 soThu2 i
+
+        soThu1 = 1; //số đứng trước soThu2
+        soThu2 = 2; //số đứng trước số i BÊN TRÁI
+
+        //viết 03 số khởi tạo dãy FIBONACCI
+        daySo = "0 1 2";
+
+        //chạy dãy số từ 3
+        do{
+            isFibo = i===(soThu1+soThu2); //tách điều kiện ra 01 biến cho dễ nhìn
+
+            console.log(isFibo);
+
+            if(isFibo){
+                //nếu là số Fibo thì tăng f++
+                f++;
+                //dịch PHẢI 02 số đứng trước 01 vị trí
+                soThu1 = soThu2;
+                soThu2 = i;
+
+                //vì i lúc này đã là số FIBO nên đưa vào dãy FIBO, có thêm khoảng trắng cho dễ nhìn.
+                daySo += " " + i;
+
+                i++; //tăng i để xét tiếp cho VÒNG SAU
+
+            }else{i++;} //nếu không phải
+
+            //nếu sai tăng i xét tiếp nhưng không tăng f
+
+        }while(f<20);
+        //vòng lặp dừng lại khi f = 20
+
+        //in dãy số
+        document.write(daySo);
+        console.log(f);
+    }*/
+
+</script>
+<div class="baitap">Bài 4: Tìm số đầu tiên trong dãy fibonacci chia hết cho 5.</div>
+<script>
+/*
+    let i, soThu1, soThu2, isFibo, chiaHetCho5, result;
+
+    //khởi tạo dãy 0 1 2 3
+    //khởi tạo stop
+    soThu1 = 1;
+
+    soThu2 = 2;
+
+    i = 3;//khởi tạo stop
+
+    //Tìm 05 số FIBO đầu tiên và xét thêm %5 ===0, có xét 0,1,2???
+
+    //nếu ===0 thì gán result = i
+    do{
+        //xét i và gán result = i nếu tất cả là TRUE
+        isFibo = i===(soThu1 + soThu2);
+
+        isFibo = i===(soThu1+soThu2);
+
+        chiaHetCho5 = i%5===0;
+
+        console.log(soThu1);
+        console.log(soThu2);
+        console.log(i);
+        console.log(isFibo);
+        console.log(chiaHetCho5);
+
+        if(isFibo && chiaHetCho5){
+            result = i;
+        }else if(isFibo){
+            //nếu là số FIBO, dịch phải soThu1 và soThu2 theo thứ tự: soThu1 soThu2 i
+            soThu1 = soThu2;
+            soThu2 = i;
+
+            //tăng i xét tiếp vòng sau
+            i++;
+        }else{
+            //tăng i xét tiếp vòng sau
+            i++;
+        }
+
+        //tăng stop bằng cách tăng i
+
+    }while(!(isFibo && chiaHetCho5)); //điều kiện stop là isFibo && chiaHetCho5
+
+    console.log(result);
+*/
+
+</script>
+
+<div class="baitap">Bài 5: Tính tổng của 20 số đầu tiên trong dãy fibonacci.</div>
+<form>
+    <input type="button" id="btnBai5" value="Bài 5"/>
+</form>
+
+<script>
+/*    let btnBai5;
+
+    btnBai5 = document.getElementById("btnBai5");
+
+    //Khi bấm nút btnBai3 thì HÀNH ĐỘNG
+    btnBai5.addEventListener("click",functionBai5);
+
+    function functionBai5() {
+        //Fibonacci là dãy số bắt đầu từ 0, 1, 2 ...số thứ n = tổng 02 số đứng trước nó.
+        let i, f, sothu1, sothu2, daySo, isFibo;
+
+        f = 3; //vì mặc định 03 số đầu của dãy FIBO là 0,1,2 đã bị bỏ qua
+
+        i = 3; //i là số HIỆN TẠI cần xét có phải số FIBO hay không theo thứ tự sau: soThu1 soThu2 i
+
+        soThu1 = 1; //số đứng trước soThu2
+        soThu2 = 2; //số đứng trước số i BÊN TRÁI
+
+        //viết 03 số khởi tạo dãy FIBONACCI
+        daySo = 0;
+
+        //chạy dãy số từ 3
+        do {
+            isFibo = i === (soThu1 + soThu2); //tách điều kiện ra 01 biến cho dễ nhìn
+
+            console.log(isFibo);
+
+            if (isFibo) {
+                //nếu là số Fibo thì tăng f++
+                f++;
+                //dịch PHẢI 02 số đứng trước 01 vị trí
+                soThu1 = soThu2;
+                soThu2 = i;
+
+                //vì i lúc này đã là số FIBO nên đưa vào dãy FIBO, có thêm khoảng trắng cho dễ nhìn.
+                daySo += i;
+
+                i++; //tăng i để xét tiếp cho VÒNG SAU
+
+            } else {
+                i++;
+            } //nếu không phải
+
+            //nếu sai tăng i xét tiếp nhưng không tăng f
+
+        } while (f < 20);
+        //vòng lặp dừng lại khi f = 20
+
+        //in dãy số
+        document.write(daySo);
+        console.log(f);
+    }*/
+</script>
+
+
+<div class="baitap">Bài 6: Tính tổng của 30 số chia hết cho 7 đầu tiên trong các số tự nhiên.</div>
+<script>
+    /*let result, a, n;
+    //chạy dãy số a từ 0, đến khi tong30So(i) chia hết cho 7
+    a = 0;
+
+    do{
+        n = tong30So(a);
+
+        chiaHetCho7 = n%7===0;
+
+        if(chiaHetCho7){
+            result = n;
+        }
+        a++;
+
+        /!*console.log(n);*!/
+
+    }while(!chiaHetCho7);
+
+    console.log(result);
+
+
+
+    function tong30So(i){
+        //tong 30 số tính từ i
+        let tong, count;
+
+        //khởi tạo
+
+        count = 0;//khởi động stop
+
+        tong = 0;
+        //end khởi tạo
+
+        do{
+            i++;
+
+            count++; //tăng stop là count
+
+            tong += i;
+        }while(count<30); //điều kiện stop vòng lặp
+
+        return tong;
+    }*/
+
+</script>
+<div class="baitap">
+Bài 7: Hãy viết một chương trình in ra các số từ 1 đến 100. Nhưng nếu số chia hết cho 3 thì in ra "Fizz", 5
+            thì in ra "Buzz" thay vì in ra số đó. Và nếu số đó chia hết cho cả 3 và 5 thì in ra chữ "FizzBuzz".
+</div>
+
+<script>
+    /*//in ra dãy 1-100
+    let result;
+
+    for(let i=1;i<=100;i++){
+        chiaHetCho3 = i%3===0;
+
+        chiaHetCho5 = i%5===0;
+
+        //nếu chia hết cho 3 in ra Fizz
+        if(chiaHetCho3){ result = "Fizz"; }
+
+        //nếu chia hết cho 5 in ra Buzz
+        if(chiaHetCho5){ result = "Buzz"; }
+
+        //nếu chia hết cho 3 && 5 in ra FizzBuzz
+        if(chiaHetCho3&&chiaHetCho5){ result = "FizzBuzz"; }
+
+        //nếu không chia hết cho 3 và cũng không chia hết cho 5 thì in i ra
+        if(!chiaHetCho3&&!chiaHetCho5){ result = i; }
+
+        //in result ra màn hình
+        console.log(result);
+    }*/
+
+</script>
+
+<div class="baitap">
+    <ul>
+        <li>Bài 8: Game đoán số</li>
+
+        <li>Nâng cấp game "Hãy thử đoán xem!"</li>
+
+        <li>1. Thiết kế giao diện: Giao diện chỉ gồm 1 Button "Chơi": cho phép người dùng bắt đầu chơi hoặc chơi lại
+        </li>
+
+        <li>2. Mô tả ứng dụng: Khi người dùng nhấn vào button “Chơi”:</li>
+
+        <li>Ứng dụng hiển thị cửa sổ prompt cho phép người dùng nhập vào muốn đoán trong khoảng nào</li>
+        <li>Ứng dụng chọn ra số ngẫu nhiên trong khoảng mà ngườI dùng chọn</li>
+        <li>Ứng dụng hiển thị cửa số prompt cho người dùng nhập giá trị mà người dùng đoán</li>
+        <li>Ứng dụng lấy kết quả và so sánh với giá trị ngẫu nhiên.</li>
+        <li>Nếu bằng thì hiển thị thông báo chúc mừng và kết thúc lượt chơi</li>
+        <li>Nếu lớn hơn hoặc bé thua thì hiển thị thông báo lớn hơn hay bé thua và cho phép người dùng lựa chọn lại.
+        </li>
+    </ul>
+</div>
+
+<form>
+    <label for="txtLowerNumberLimit">From</label>
+    <input type="text" id="txtLowerNumberLimit" placeholder = "Nhập cận dưới..."/>
+    <label for="txtUpperNumberLimit">To</label>
+    <input type="text" id="txtUpperNumberLimit" placeholder = "Nhập cận trên..."/>
+    <br/><br/>
+    <label for="txtGuestNumber">Số đoán</label>
+    <input type="text" id="txtGuestNumber" placeholder="Nhập số bạn đoán..."/>
+    <input type="button" id="btnLoto" value="kết quả LOTO"/>
+</form>
+<div id="randomNumber"></div>
+<script>
+    let btnLoto;
+
+    //lấy nút btnLoto
+    btnLoto = document.getElementById("btnLoto");
+
+    //khi bấm nút btnLoto thì HÀNH ĐỘNG
+    btnLoto.addEventListener("click",functionGuest);
+
+    //hàm HÀNH ĐỘNG
+    function functionGuest() {
+        let lowerNumberLimit, upperNumberLimit, guestNumber, randomNumber, message;
+
+        //nhập dữ liệu từ txtLowerNumberLimit
+        lowerNumberLimit = parseInt(document.getElementById("txtLowerNumberLimit").value);
+
+        //nhập dữ liệu từ txtUpperNumberLimit
+        upperNumberLimit = parseInt(document.getElementById("txtUpperNumberLimit").value);
+
+        //nhập dữ liệu từ txtGuestNumber
+        guestNumber = parseInt(document.getElementById("txtGuestNumber").value);
+
+        //Xét nếu cả 3 số do người dùng nhập vào là K số NGUYÊN thì xuất ra thông báo "Dữ liệu không hợp lệ!"
+        //nếu thỏa đk thì làm tiếp
+        if(!isNaN(lowerNumberLimit)&&!isNaN(upperNumberLimit)&&!isNaN(txtGuestNumber)){
+            message = "Dữ liệu k hợp lệ!";
+        }else{
+            //tính số ngẫu nhiên trong khoảng cận DƯỚI - cận TRÊN
+            randomNumber = Math.floor(Math.random() * (upperNumberLimit - 1)) + lowerNumberLimit;
+
+            //giải thuật 2: randomNumber = Math.random()%guestNumber tui chưa thử mới nghĩ thôi???
+
+            //so sánh randomNumber và guestNumber , nếu trùng thì alert chúc mừng bạn đã trúng giải!!!
+            //sai thì alert "Xổ số ích nước lợi nhà, trời cho là trúng trật là trò chơi!!!
+            message = randomNumber===guestNumber?"chúc mừng bạn đã trúng giải!!!" : "Xổ số ích nước lợi nhà, trời cho là trúng trật là trò chơi!!!";
+
+        }
+
+        alert(message + randomNumber);
+
+    }
+
+</script>
+</body>
+</html>
+<script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

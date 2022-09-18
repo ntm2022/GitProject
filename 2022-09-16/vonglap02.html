@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vòng lặp 2</title>
+    <style>
+        .inSao{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<h2>Bài 1: In dãy Fibonaci</h2>
+<form>
+    <input type="button" id="btnFibo" value="In dãy FIBO"/>
+</form>
+<script>
+    let btn1;
+
+    //lấy nút btnFibo
+    btn = document.getElementById("btnFibo");
+
+    //khi bấm nút Fibo thì HÀNH ĐỘNG
+    btnFibo.addEventListener("click",fibo);
+
+    //hàm xử lý HÀNH ĐỘNG
+    function fibo() {
+
+        //Fibonacci là dãy số bắt đầu từ 0, 1, 2 ...số thứ n = tổng 02 số đứng trước nó.
+        let i, f, sothu1, sothu2, daySo, isFibo;
+
+        //nhập n là chiều dài dãy FIBO cần in
+        n = parseInt(prompt("Nhập chiều dài dãy FIBO"));
+
+        f = 3; //vì mặc định 03 số đầu của dãy FIBO là 0,1,2 đã bị bỏ qua
+
+        i = 3; //i là số HIỆN TẠI cần xét có phải số FIBO hay không theo thứ tự sau: soThu1 soThu2 i
+
+        soThu1 = 1; //số đứng trước soThu2
+        soThu2 = 2; //số đứng trước số i BÊN TRÁI
+
+        //viết 03 số khởi tạo dãy FIBONACCI
+        daySo = "0 1 2";
+
+        //chạy dãy số từ 3
+        do{
+            isFibo = i===(soThu1+soThu2); //tách điều kiện ra 01 biến cho dễ nhìn
+
+            console.log(isFibo);
+
+            if(isFibo){
+                //nếu là số Fibo thì tăng f++
+                f++;
+                //dịch PHẢI 02 số đứng trước 01 vị trí
+                soThu1 = soThu2;
+                soThu2 = i;
+
+                //vì i lúc này đã là số FIBO nên đưa vào dãy FIBO, có thêm khoảng trắng cho dễ nhìn.
+                daySo += " " + i;
+
+                i++; //tăng i để xét tiếp cho VÒNG SAU
+
+            }else{i++;} //nếu không phải
+
+            //nếu sai tăng i xét tiếp nhưng không tăng f
+
+        }while(f<n);
+        //vòng lặp dừng lại khi f = n
+
+        //in dãy số
+        document.write(daySo);
+    }//end myFunction
+</script>
+
+<h2>Bài 2: Tính giai thừa của một số nguyên dương</h2>
+<form>
+    <input type="button" id="btnBai2" value="Giai thừa"/>
+</form>
+<script>
+    //giai thừa là số n!=1*2*...n
+    let btn2;
+
+    //lấy nút btnBai2
+    btn = document.getElementById("btnBai2");
+
+    //Khi bấm nút btnBai2 thì tính GIAI THỪA
+    btnBai2.addEventListener("click",factorial);
+
+    //hàm tính giai thừa
+    function factorial() {
+        let n, giaiThua ,message;
+        //nhập vào số N
+        n = parseInt(prompt("Nhập n"));
+
+        //Xét N nếu k hợp lệ in ra message = "Dữ liệu k hợp lệ!!!"
+        //nếu hợp lệ thì tính giai thừa
+        if(isNaN(n)){
+            message = "Dữ liệu k hợp lệ";
+        }else{
+            //xét 02 trường hợp n=0 và n=1
+            //khởi tạo i, giaiThua
+            i = 1;
+            giaiThua = 1;
+
+            if(n!==0&&n!==1){
+                do{
+                    giaiThua *= i++;
+
+                }while(i<=n);//stop là i
+
+                //in ra giaiThua
+                message = giaiThua;
+            }else{
+                message = "số N phải khác 0 và 1";
+            }
+
+        }
+        alert(message);
+    }//end factorial
+</script>
+
+<h2>Bài 3: In tam giác vuông. Các góc vuông nằm ở các vị trí khác nhau</h2>
+
+<div id="bai3" class="inSao"></div>
+<script>
+    let bai3;
+
+    bai3 = document.getElementById("bai3");
+
+    //hình 01
+    //vòng lặp for1(i=1;i<=5;i++)
+    for(let i=1;i<=5;i++){
+
+        //for11(j=0;j<i;j++) chạy 05 lần j chính là số lần in ngôi sao
+        for(let j=0;j<i;j++){
+            bai3.innerHTML += "*";
+        }
+        //xuống dòng 5 lần
+        bai3.innerHTML += "<br/>";
+    }
+
+    //hình 2
+    //vòng lặp for2
+    bai3.innerHTML += "<br/>";
+    for(let i2=1;i2<=5;i2++){
+
+        //for11(j=0;j<i;j++) chạy 05 lần j chính là số lần in ngôi sao
+        for(let j2=i2;j2<=5;j2++){
+            bai3.innerHTML += "*";
+        }
+        //xuống dòng 5 lần
+        bai3.innerHTML += "<br/>";
+    }
+
+    //hình 3
+    //vòng lặp for3
+    bai3.innerHTML += "<br/>";
+    for(let i3=1;i3<=5;i3++){
+
+        //in (5-i3) khoảng trắng và in i3 lần *
+        for(let j3=1;j3<=(5-i3);j3++){
+            bai3.innerHTML += "&nbsp&nbsp"; //ký tự này HTML k in ra nếu gõ " "
+        }
+        for(let k3=0;k3<i3;k3++){
+            bai3.innerHTML += "*";
+        }
+
+        //xuống dòng 5 lần
+        bai3.innerHTML += "<br/>";
+    }
+
+    //hình 4
+    //vòng lặp for4
+    bai3.innerHTML += "<br/>";
+    for(let i4=1;i4<=5;i4++){
+
+        //in i4 khoảng trắng và in (5-i4) lần *
+        for(let k4=0;k4<i4-1;k4++){
+            bai3.innerHTML += "&nbsp&nbsp";
+        }
+
+        for(let j4=0;j4<=(5-i4);j4++){
+            bai3.innerHTML += "*";
+        }
+        //xuống dòng 5 lần
+        bai3.innerHTML += "<br/>";
+    }
+</script>
+
+<h2>Bài 4: In hình chữ nhật</h2>
+<div id="bai4" class="inSao"></div>
+<script>
+    let bai4;
+
+    bai4 = document.getElementById("bai4");
+    //for1 chạy xuống dòng 04 lần
+    for(let iBai4=1;iBai4<5;iBai4++){
+
+        //for11 in hết cạnh dài *
+        for(let jBai4=0;jBai4<10;jBai4++){
+            //if số dòng i =1 || 2 thì in 02 sao thôi, ngược lại in &nbsp&nbsp
+            cond = iBai4>1 && iBai4<4 && jBai4>0 &jBai4<9;
+            if(cond){
+                bai4.innerHTML += "&nbsp&nbsp";
+            }else{
+
+                bai4.innerHTML += "*";
+
+            }
+
+        }
+        //xuống dòng 5 lần
+        bai4.innerHTML += "<br/>";
+    }
+
+
+
+</script>
+<h2>Bài 5: Viết chương trình tính lãi ngân hàng (lãi mẹ đẻ lại con) khi biết số tiền ban đầu, số tháng cho vay và lãi
+    xuất hàng tháng.
+</h2>
+<form>
+    <input type="button" id="btnBai5" value="Tính lãi ngân hàng"/>
+</form>
+<script>
+    let laiSuat1Thang, soTien, soThang, tienLai, btnBai5;
+
+    btnBai5 = document.getElementById("btnBai5");
+
+    //khi bấm nút btnBai5 thì Tính Lãi
+    btnBai5.addEventListener("click",tinhLai);
+
+    function tinhLai(){
+        //tienLai = (laiSuat1Thang * soTien / 100) * soThang
+        laiSuat1Thang = parseInt(prompt("Nhập lai Suat 1Thang"));
+
+        soTien = parseInt(prompt("Nhập so Tien"));
+
+        soThang = parseInt(prompt("Nhập số tháng"));
+
+        tienLai = (laiSuat1Thang * soTien / 100) * soThang;
+
+        alert(tienLai); //nên viết thêm function thêm dấu chấm su mỗi 03 chữ số tính từ PHẢI
+    }
+
+</script>
+
+<h2>Bài 6: In hình trái tim</h2>
+<div id="bai6" class="inSao"></div>
+<script>
+    let bai6;
+
+    bai6 = document.getElementById("bai6");
+
+//giống bài 4 nhưng 05 cái if cho từng dòng
+    //dùng 02 vòng for1 để xuống dòng
+    //hàm inSao(i) xét i=N để in sao vào vị trí tương ứng
+    for(let iBai6=1;iBai6<=5;iBai6++){
+        //tổng cộng có 11 cột j
+        //nếu dòng 1=> cột 4,5,6 in khoảng trắng còn lại in sao
+        if(iBai6===1){
+            for(let jBai6=0;jBai6<11;jBai6++){
+
+                if(jBai6===0||jBai6===4||jBai6===5||jBai6===6||jBai6===10){
+                    bai6.innerHTML += "&nbsp&nbsp";
+                }else{
+                    bai6.innerHTML += "*";
+                }
+            }
+        }
+
+        //nếu dòng 2 => cột j ===1-6-10 in sao, còn lại in khoảng trắng
+        if(iBai6===2){
+            for(let jBai6=0;jBai6<11;jBai6++) {
+                if (jBai6 === 1 || jBai6 === 5 || jBai6 === 9) {
+                    bai6.innerHTML += "*";
+                } else {
+                    bai6.innerHTML += "&nbsp&nbsp";
+                }
+            }
+        }
+
+        //nếu dòng 3 => cột j===2-8 in sao, còn lại in khoảng trắng
+        if(iBai6===3){
+            for(let jBai6=0;jBai6<11;jBai6++) {
+                if (jBai6 === 2 || jBai6 === 8) {
+                    bai6.innerHTML += "*";
+                } else {
+                    bai6.innerHTML += "&nbsp&nbsp";
+                }
+            }
+        }
+
+        //nếu dòng 4 => in sao cột j===4-6
+        if(iBai6===4){
+            for(let jBai6=0;jBai6<11;jBai6++) {
+                if (jBai6 === 4 || jBai6 === 6) {
+                    bai6.innerHTML += "*";
+                } else {
+                    bai6.innerHTML += "&nbsp&nbsp";
+                }
+            }
+        }
+
+        //nếu dòng 5 => in sao cột j===5
+        if(iBai6===5){
+            for(let jBai6=0;jBai6<11;jBai6++) {
+                if (jBai6 === 5) {
+                    bai6.innerHTML += "*";
+                } else {
+                    bai6.innerHTML += "&nbsp&nbsp";
+                }
+            }
+        }
+
+        //xuống dòng 5 lần
+        bai6.innerHTML += "<br/>";
+    }
+</script>
+
+</body>
+</html><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game TIC TAC TOE full</title>
+</head>
+<body>
+<pre>
+  Xây dựng game caro đơn giản sử dụng phần thực hành về tạo bàn cờ caro. Bàn cờ thay vì số 0 hiển thị mặc định bằng dấu (.).
+
+Có 2 người chơi lần lượt nhập vào là X và O. Mỗi lần giá trị được nhập vào thì bàn cờ thay đổi giá trị theo người chơi.
+
+Xác định người chiến thắng nhập giá trị có 3 ô liên tiếp giống nhau.
+</pre>
+<h3>Caro game simple</h3>
+<p id="carogame"></p>
+<input type="button" value="Change Value" onclick="ChangeValue()">
+
+</body>
+</html>
+<script>
+  let b = document.getElementById('carogame');
+  let data = '';
+  let board = [];
+  var h = 1;
+  //Add các phần tử vào mảng hai chiều
+  for (let i = 0; i < 5; i++){
+    board[i] = new Array('(.)','(.)','(.)','(.)','(.)');
+  }
+
+  //Xử lý hiển thị ban đầu
+  for(let i = 0; i<5; i++){
+    data += '<br>';
+    for (let j = 0; j < 5; j++){
+      data += board[i][j] + '&ensp;';
+    }
+  }
+  b.innerHTML = data;
+
+  //Sự kiện khi clink vào button change value
+
+  function ChangeValue() {
+    data = '';
+    let positionX = parseInt(prompt("Enter the position of x"));
+    let positionY = parseInt(prompt("Enter the position of y"));
+    if(h % 2 == 0){
+      board[positionX][positionY] = 'x';
+    }else {
+      board[positionX][positionY] = 'o';
+    }
+    h++;
+    for (let i = 0; i<5; i++){
+      data += '<br>';
+      for (let j = 0; j<5; j++){
+        data += board[i][j] + '&ensp;' + '&ensp;' + '&ensp;';
+      }
+    }
+    b.innerHTML = data;
+
+    //Xử lý x hay o thắng
+    for(let i=0; i<5; i++){
+      for (let j=0; j<5; j++){
+        if (board[i][j] === 'x' && board[i][j+1] === 'x' && board[i][j+2] === 'x' || //xử lý khi có 03 chữ x theo chiều ngang
+                board[i][j] === 'x' && board[i+1][j] === 'x' && board[i+2][j] === 'x'){ //xử lý khi có 03 chữ x theo chiều dọc
+          alert("x Thắng");
+        }else if(board[i][j] === 'o' && board[i][j+1] === 'o' && board[i][j+2] === 'o' || //xử lý khi có 03 chữ o theo chiều ngang
+                board[i][j] === 'o' && board[i+1][j] === 'o' && board[i+2][j] === 'o'){ //xử lý khi có 03 chữ o theo chiều dọc
+          alert("o Thắng");
+        }//nên có thêm phần xét 3 chữ x theo đường chéo và 03 chữ o theo đường chéo???
+      }
+    }
+  }
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

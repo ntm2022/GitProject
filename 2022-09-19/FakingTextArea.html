@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Faking TextArea</title>
+</head>
+<body>
+<form>
+
+  <textarea id="txtarea" onkeydown="myFunction();" cols="50" rows="4"></textarea>
+  
+</form>
+</body>
+</html>
+<script>
+  function myFunction(){
+    let board = document.getElementById("txtarea");
+    if(board.value === "tôi tên là MINH"){
+      board.value = "";
+    }else{
+      board.value = "tôi tên là MINH"; //gán giá trị ban đầu
+    }
+
+
+  }
+</script>

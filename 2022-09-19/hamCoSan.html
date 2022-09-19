@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sử dụng các hàm có sẵn</title>
+</head>
+<body>
+<pre>
+  Bài 1: Viết một chương trình Javascript để nối tất cả các phần tử trong một mảng chuỗi lại với nhau. Ví dụ có mảng chuỗi như sau: myColor = ["Red", "Green", "White", "Black"];
+Sau khi thực thi chương trình sẽ trả về dạng như sau :
+
+"Red,Green,White,Black"
+
+Có thể xem hướng dẫn tại: https://www.w3resource.com/javascript-exercises/javascript-array-exercise-5.php
+</pre>
+<form>
+  <input type="button" value="Bài 1" onclick="fBai1();"/>
+</form>
+<script>
+  function fBai1(){
+    myColor = ["Red", "Green", "White", "Black"];
+    console.log(myColor.toString());
+    console.log(myColor.join());
+    console.log(myColor.join('+'));
+  }
+</script>
+<pre>
+  Bài 2: Viết một chương trình nhận một số nhập vào và chèn dấu (-) giữa 2  số chẵn. Ví dụ nếu bạn nhập vào 025468 thì kết quả của chương trình sẽ là 0-254-6-8.
+
+Có thể xem hướng dẫn tại:
+
+https://www.w3resource.com/javascript-exercises/javascript-array-exercise-6.php
+</pre>
+<form>
+  <input type="button" value="Bài 2" onclick="fBai2();"/>
+</form>
+<script>
+  //ứng dụng trong hiển thị số điện thoại???
+  function fBai2(){
+    var num = window.prompt();
+    var str = num.toString();
+    var result = [str[0]];
+
+    for (var x = 1; x < str.length; x++) {
+      if (str[x - 1] % 2 === 0 && str[x] % 2 === 0) {
+        result.push('-', str[x]);
+      } else {
+        result.push(str[x]);
+      }
+    }
+    console.log(result.join(''));
+  }
+</script>
+<pre>
+  Bài 3: Viết một chương trình nhập vào một chuỗi và chuyển các ký tự chữ thường trong chuỗi vừa nhập sang thành dạng chữ hoa.
+  Ví dụ: nếu bạn nhập vào chuỗi 'The Quick Brown Fox' kết quả của chương trình là 'tHE qUICK bROWN fOX'.
+
+Có thể xem hướng dẫn tại:
+
+https://www.w3resource.com/javascript-exercises/javascript-array-exercise-9.php
+</pre>
+<form>
+  <input type="button" value="Bài 3" onclick="fBai3();"/>
+</form>
+<script>
+  function fBai3(){
+    var str = 'c'; //sửa chữ c thành chữ ban muốn chuyển HOA-thường Ví dụ: 'mINH'
+    const UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const LOWER = 'abcdefghijklmnopqrstuvwxyz';
+    const result = [];
+
+    for(let x=0; x<str.length; x++)
+    {
+      if(UPPER.includes(str[x]))
+      {
+        result.push(str[x].toLowerCase());
+      }
+      else if(LOWER.includes(str[x]))
+      {
+        result.push(str[x].toUpperCase());
+      }
+      else
+      {
+        result.push(str[x]);
+      }
+    }
+    console.log(result.join(''));
+
+  }
+  </script>
+</body>
+</html><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

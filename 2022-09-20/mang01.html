@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài tập mảng 01</title>
+</head>
+<body>
+<h3>
+    Bài 1- Viết chương trình khởi tạo mảng số nguyên gồm 10 phần tử. Chương trình thực hiện tính và hiển thị xem có bao
+    nhiêu số nguyên lớn hơn hoặc bằng 10.
+</h3>
+<form>
+    <input type="button" id="btnBai1" value="Nhập MẢNG" onclick="addElementToArray();"/>
+    <input type="button" id="btnBai11" value="Show MẢNG >10" onclick="displayArray();"/>
+</form>
+<h2 id="bai1"></h2>
+<script>
+    let x = 0;
+    let array = [];
+
+    function addElementToArray() {
+
+        //gán giá trị ô txtValue vào mảng array ở vị trí x
+        array[x] = parseInt(prompt("Nhập phần tử thứ " + x));
+
+        //thông báo đã gán thêm 01 phần tử array ở vị trí x
+        alert("Element: " + array[x] + " added at index " + x);
+
+        //tăng x lên cho lần thêm phần tử sau
+        x++;
+
+    }
+
+    function displayArray() {
+        let e = "<hr/>"; //dấu hr ngăn cách với form nhập liệu ở trên
+        /*let count = 0;*/
+
+        //In từng phần tử trên 01 dòng
+        for (let i = 0; i < array.length; i++) {
+            if (array[i] >= 10) {
+                e += "Element " + i + " = " + array[i] + "<br/>";
+            }
+
+        }
+
+        //xuất ra trong thẻ bai1
+        document.getElementById("bai1").innerHTML = e;
+    }
+</script>
+<h3>
+    Bài 2- Viết chương trình khởi tạo mảng số nguyên gồm 10 phần tử khác nhau. Chương trình hiển thị ra được phần tử có
+    giá trị lớn nhất trong mảng và vị trí của phần tử đó.
+</h3>
+<form>
+    <input type="button" id="btnBai2" value="Nhập MẢNG" onclick="addElementToArray();"/>
+    <input type="button" id="btnTimMax2" value="Tìm MAX"
+           onclick="let max=findMax(array);alert(max + ' vị trí ' + array.indexOf(max));"/>
+</form>
+<h3>
+    Bài 3- Viết chương trình khởi tạo mảng số nguyên. Hiển thị giá trị lớn nhất trong mảng đó. In ra giá trị trung bình
+    của các phần tử trong mảng.
+</h3>
+<form>
+    <input type="button" id="btnBai3" value="Tạo mảng" onclick="addElementToArray();"/>
+    <input type="button" id="btnTimMax" value="Tìm MAX" onclick="alert(findMax(array));"/>
+    <input type="button" id="btnTimAverage" value="Tìm Average" onclick="alert(findAverage(array));"/>
+</form>
+<h2 id="bai3"></h2>
+<script>
+    //tìm giá trị lớn nhất trong 01 mảng
+    function findMax(arr) {
+        let max = arr[0];
+        for (var i = 0; i < arr.length; i++) {
+            if (max < arr[i]) {
+                max = arr[i];
+            }
+        }
+        return max;
+    }
+
+    function findAverage(arr) {
+        let sum = 0;
+        for (var i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        return sum / arr.length;
+    }
+</script>
+<h3>
+    Bài 4- Viết chương trình khởi tạo/nhập vào một mảng số nguyên và đảo ngược các phần tử trong mảng đó.
+</h3>
+<form>
+    <input type="button" id="btnBai4" value="Nhập mảng" onclick="addElementToArray();"/>
+    <input type="button" id="btnReverse" value="Đảo mảng" onclick="alert(reversArray(array));"/>
+</form>
+<script>
+    function reversArray(x) {
+        //khởi tạo 02 biến chứa vị trí đầu và cuối mảng
+        let first = 0;
+        let last = x.length - 1;
+
+        //khi first và last chưa gặp nhau(đi vào giữa mảng) tiến hành đổi chỗ các phần tử mảng ở 02 đầu mút
+        //biến temp là biến tạm làm trung gian để hoán đổi giá trị của các phần tử mảng
+        while (first < last) {
+            let temp = x[first];
+            x[first] = x[last];
+            x[last] = temp;
+            first++;
+            last--;
+        }
+        return x;
+    }
+</script>
+<h3>
+    Bài 5- Viết chương trình đếm số nguyên âm trong một chuỗi
+</h3>
+<form>
+    <input type="button" id="btnBai5" value="Bài 5" onclick="fBai5();"/>
+</form>
+<script>
+    function fBai5() {
+        let s = prompt("nhập chuỗi số");
+        let count = 0;
+
+        for (var i = 0; i < s.length; i++) {
+            if (s[i] === "-") { //đếm dấu (-)
+                count++;
+            }
+        }
+        alert(count);
+    }
+
+</script>
+<h3>
+    Bài 6- Viết chương trình khởi tạo/nhập vào một mảng số nguyên gồm 10 phần tử, nhập/tạo phần tử số nguyên V. Chương
+    trình tìm xem V có nằm trong mảng số nguyên không? Nếu V thuộc mảng số nguyên thì in ra "V is in the array" còn lại
+    in ra "V is not in the array".
+</h3>
+<form>
+    <input type="button" id="btnBai6" value="Nhập mảng" onclick="addElementToArray();"/>
+
+    <input type="button" id="btnFindV" value="Tìm V"
+           onclick="let v=parseInt(prompt('Nhập số V cần tìm')); findV(v,array)?alert(v+' in array'):alert('Không tìm thấy '+v);"/>
+</form>
+<script>
+    //tìm giá trị V trong mảng array
+    function findV(v, arr) {
+
+        for (var i = 0; i < arr.length; i++) {
+            if (v === arr[i]) {
+                return true;
+            }
+        }
+        return false;
+    }
+</script>
+<h3>
+    Bài 7- Viết chương trình khởi tạo/nhập vào một mảng số nguyên gồm 10 phần tử, nhập/tạo phần tử số nguyên V. Chương
+    trình kiểm tra xem V có thuộc mảng đã cho không, nếu V thuộc mảng đã cho xoá V khỏi mảng (Bản chất việc xoá ở đây
+    tức là dịch phần tử ở bên phải V sang vị trí của V, và gán 0 cho phần tử cuối cùng của mảng)
+</h3>
+<form>
+    <input type="button" id="btnBai7" value="Nhập mảng" onclick="addElementToArray();"/>
+    <input type="button" id="btnXoaV" value="Xóa V" onclick="fBai7();"/>
+</form>
+<script>
+    function fBai7() {
+        let newArr
+        let v = parseInt(prompt('Nhập số V cần xóa'));
+        newArr = findV(v, array) ? xoaV(v, array) : alert(v + " not in array!");
+        alert(newArr);
+    }
+
+    function xoaV(a, arr) {
+        for (var i = 0; i < arr.length; i++) {
+            if (a === arr[i]) {
+                //dịch phải qua 01 vị trí để xóa arr[i]
+                for (var j = i; j < arr.length; j++) {
+                    //phần tử cuối cùng lúc này gán =0
+                    j !== (length - 1) ? arr[j] = arr[j + 1] : arr[j] = 0;
+                }//end for dịch phải
+                return arr;
+            }//end if tìm thấy V
+        }//end for duyệt mảng array
+    }//end function xoaV
+
+</script>
+<h3>
+    Bài 8- Viết chương trình khởi tạo/nhập vào một mảng số nguyên gồm 10 phần tử. Chương trình sắp xếp mảng theo thứ tự
+    giảm dần và hiển thị ra mảng đã được sắp xếp.
+</h3>
+<form>
+    <input type="button" id="btnBai8" value="Nhập mảng" onclick="addElementToArray();"/>
+    <input type="button" id="btnGiamDan" value="Giảm dần quick sort" onclick="alert(quickSortD(array));"/>
+</form>
+<script>
+    //tăng dần
+    function quickSort(array) {
+        if (array.length <= 1) {return array;}
+
+        var pivot = array[0];
+
+        var left = [];
+        var right = [];
+
+        for (var i = 1; i < array.length; i++) {
+            array[i] < pivot ? left.push(array[i]) : right.push(array[i]);
+        }
+
+        return quickSort(left).concat(pivot, quickSort(right));
+    }
+
+    //giảm dần
+    function quickSortD(array) {
+        if (array.length <= 1) { return array;}
+        //loại bỏ trường hợp mảng rỗng
+
+        var pivot = array[0];//chọn điểm chia là phần tử đầu tiên của mảng=>dễ hiểu và gọn???
+
+        var left = [];
+        var right = [];
+
+        for (var i = 1; i < array.length; i++) {
+            array[i] > pivot ? left.push(array[i]) : right.push(array[i]);
+            //em nào LỚN HƠN đẩy qua mảng TRÁI, em nào NHỎ HƠN đẩy qua mảng PHẢI
+        }//sửa mỗi dấu < thành > để biến sắp xếp tăng dần thành giảm dần
+
+        return quickSortD(left).concat(pivot, quickSortD(right));
+        //nối 03 mảng lại, với p là điểm chia pivot nên ở giữa
+    }
+</script>
+
+<h3>
+    Bài 9- Viết chương trình khởi tạo/nhập vào 2 mảng số nguyên gồm 10 phần tử, gọi là mảng a và b. Mảng c là một mảng
+    được khai báo gồm 20 phần tử số nguyên. Chương trình sẽ lưu các phần tử được nối từ hai mảng b và a vào mảng c. Hiển
+    thị mảng c.
+</h3>
+<form>
+    <input type="button" id="btnBai9" value="Bài 9" onclick="concatArray();"/>
+</form>
+<script>
+    function concatArray(){
+        let a = [1,2,3];
+        let b = [4,5,6];
+        let c = [];
+        let j = 0;
+        for(var i=0;i<(a.length+b.length);i++){
+            if(i<a.length){//nhập mảng a[] vào c[]
+                c[i]=a[i];
+            }else{//nhập mảng b[] vào c[]
+                c[i] = b[j++];
+            }
+        }//end for
+
+        alert(c);
+    }
+
+</script>
+</body>
+</html><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

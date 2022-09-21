@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tìm giá trị nhỏ nhất của mảng</title>
+</head>
+<body>
+<form>
+    <input type="button" id="btnNhapMang" value="Tạo mảng" onclick="add_element_to_array();"/>
+
+    <input type="button" id="btnTimMin" value="Tìm MIN" onclick="alert(minArray(array));"/>
+</form>
+</body>
+</html>
+<script>
+    function minArray(arr) {
+        if(arr.length === 0)
+            return -1;
+        let min = arr[0];
+
+        for(let i = 1; i < arr.length; i++){
+            if(arr[i] < min){
+                min = arr[i];
+            }
+        }
+        return min;
+    }
+    let array = [];
+    let x = 0;
+    function add_element_to_array(){
+
+        //gán giá trị ô txtValue vào mảng array ở vị trí x
+        array[x] = prompt("Nhập phần tử vị trí" + x);
+
+        //thông báo đã gán thêm 01 phần tử array ở vị trí x
+        alert("Element: " + array[x] + " added at index " + x);
+
+        //tăng x lên cho lần thêm phần tử sau
+        x++;
+
+    }
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

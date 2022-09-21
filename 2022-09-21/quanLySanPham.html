@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý sản phẩm</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #app{
+            background-color: pink;
+            padding:30px;
+            border: 1px solid hotpink;
+            border-radius:5px 5px 5px 5px;
+            box-shadow:5px 5px 5px hotpink;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .nut{
+            color: white;
+            background-color: deeppink;
+            border: 1px solid deeppink;
+            border-radius:5px 5px 5px 5px;
+            padding:5px;
+        }
+        h2{
+            color: deeppink;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 0 none hotpink;
+        }
+
+        table caption {
+            text-align: left;
+        }
+        table td{
+            padding:5px;
+        }
+        /*sọc row*/
+        th, td {
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {background-color: coral;}
+
+        tr:nth-child(even) {background-color: #f2f2f2;}
+
+        table th td {
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+<pre>
+  Luyện tập sử dụng mảng, hàm. Làm quen với khái niệm "Ứng dụng quản lý".
+
+Mô tả
+Ứng dụng quản lý sản phẩm có các chức năng sau:
+
+Hiển thị danh sách sản phẩm
+Có thể thêm một sản phẩm mới vào danh sách
+Có thể sửa tên của sản phẩm trong danh sách
+Có thể xoá một sản phẩm khỏi danh sách
+Hướng dẫn
+
+Bước 1: Tạo một trang HTML với các thẻ cơ bản
+
+Bước 2: Tạo một mảng chứa danh sách sản phẩm
+
+Bước 3: Xây dựng các hàm hiển  thị danh sách sản phẩm, thêm một sản phẩm vào danh sách, sửa tên sản phẩm, xoá sản phẩm.
+
+Bước 4: Gọi hàm hiển thị danh sách sản phẩm
+
+Tạo một mảng lưu trữ tên của sản phẩm
+Sử dụng vòng lặp để hiển thị danh sách sản phẩm trên một bảng. Bảng này có 3 cột, cột đầu tiên là số thứ tự, cột thứ 2 là tên của sản phẩm, cột thứ 3 chứa nút để xoá sản phẩm.
+Bước 5: Gọi hàm thêm một sản phẩm vào danh sách
+
+Tạo một form với một ô nhập tên sản phẩm và một nút "Thêm"
+Khi nhấn nút "Thêm" thì lấy tên mới nhập và đưa vào mảng.
+Hiển thị thông báo.
+Bước 6: Gọi hàm sửa một sản phẩm trong danh sách
+
+Tạo một form với một ô để hiển thị tên danh sách và một nút "Sửa"
+Khi nhấn vào một tên của sản phẩm trong danh sách thì hiển thị tên của nó ở trong ô tên danh sách
+Sau khi sửa tên và nhấn nút "Sửa" thì cập nhật lại tên của sản phẩm đó ở trong mảng
+Bước 7: Gọi hàm xoá một sản phẩm trong danh sách
+
+Khi nhấn vào nút "xoá" ở một sản phẩm, hãy tìm vị trí của sản phẩm đó trong danh sách
+Xoá sản phẩm đó trong danh sách
+Hiển thị lại bảng
+
+  https://james.codegym.vn/mod/assign/view.php?id=15505
+</pre>
+<div id="app">
+<div id="products">
+    <h2>Add New Product</h2>
+    <form>
+        <input type="text" id="txtNewProduct" placeholder="Nhập tên sản phẩm muốn thêm..."/>
+        <input type="button" id="btnAdd" value="ADD" class="nut"/>
+    </form>
+</div>
+<div id="display"></div>
+</div>
+</body>
+</html>
+<script>
+    let productsArr = [];
+
+    let btnAdd, btnEdit, btnDel;
+
+    let x = 0;
+
+    //lấy nút btnAdd, btnEdit, btnDel
+    btnAdd = document.getElementById("btnAdd");
+    btnEdit = document.getElementById("btnEdit");
+    btnDel = document.getElementById("btnDel");
+
+    //khi bấm nút btnAdd thì chạy hàm add()
+    btnAdd.addEventListener("click", add);
+
+    function add() {
+
+        //gán giá trị ô txtNewProduct vào mảng array ở vị trí x
+        productsArr[x] = document.getElementById("txtNewProduct").value;
+
+        //thông báo đã gán thêm 01 phần tử array ở vị trí x
+        /*alert("Element: " + productsArr[x] + " added at index " + x);*/
+
+        //tăng x lên cho lần thêm phần tử sau
+        x++;
+
+        //reset lại ô txtNewProduct
+        document.getElementById("txtNewProduct").value = "";
+        display();
+
+    }
+
+    function edit(i) {
+        productsArr[i] = prompt("Nhập tên sp mới");
+        display();
+    }
+
+    function del(i) {
+        let arrLen = productsArr.length;
+        let delValue = productsArr[i];
+        for (let j = i; j < arrLen; j++) {
+            //dịch mảng qua phải 01 phần tử
+            productsArr[j] = productsArr[j + 1];
+        }
+        productsArr[arrLen - 1] = 0; //phần tử cuối =0
+        x = 0; //reset x
+        alert(delValue + " đã XÓA!");
+        display();
+    }
+
+    function display() {
+        let sout = "";
+
+        if (productsArr.length > 0) {
+
+            sout += "<table>";
+            for (let i = 0; i < productsArr.length; i++) {
+                if (productsArr[i] !== 0) {//xét trường hợp đã xóa phần tử cuối sẽ bằng 0=> k hiển thị ra
+                    sout += "<tr>";
+                    //in 03 cột
+                    sout += "<td>" + i + "</td>"; //số thứ tự
+                    sout += "<td>" + productsArr[i] + "</td>";//tên sản phẩm
+                    sout += "<td><input type='button' class='nut' id='btnEdit" + i + "' value='SỬA' onclick='edit(" + i + ");'/>&nbsp&nbsp<input type='button' class='nut' id='btnDel" + i + "' value='XÓA' onclick='del(" + i + ");'/></td>";//02 nút SỬA + XÓA
+                    sout += "</tr>";
+                }
+
+            }
+            sout += "</table>";
+            document.getElementById("display").innerHTML = sout;
+        }
+    }
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

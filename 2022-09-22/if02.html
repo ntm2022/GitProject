@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cáu trúc điều kiện 02</title>
+</head>
+<body>
+<h3 id="bai1">
+    Bài 1: Chuyển từ độ C sang độ F.
+
+    °C x 9/5 + 32 = °F
+</h3>
+<form>
+    <label for = "txtDoC">độ C</label>
+    <input type="text" id="txtDoC" placeholder="Nhập độ C..."/>
+    <br/><br/>
+    <input type="button" id="btnDoF" value="độ F"/>
+</form>
+<script>
+let btnDoF;
+
+btnDoF = document.getElementById("btnDoF");
+
+//khi bấm chuột vào nút btnDoF thì HÀNH ĐỘNG
+btnDoF.addEventListener('click', functionBai1);
+
+function functionBai1(){
+    let doC, result;
+
+    //lấy dữ liệu từ txtDoC
+    doC = parseInt(document.getElementById("txtDoC").value);
+
+    //checkInput(doC) nếu k qua thì gán result = "Dữ liệu không hợp lệ"
+    if(isNaN(doC)){
+        result = "Dữ liệu không hợp lệ!";
+    }else{//nếu qua result = doC*9/5 + 32;
+        result = doC*9/5 + 32;
+    }
+
+    //in result ra thẻ result
+    alert(result);
+}
+
+</script>
+
+<h3 id="bai2">
+    <pre>
+    Bài 2: Chuyển từ mét sang feet:
+
+    ft =m * 3.2808
+    </pre>
+</h3>
+<form>
+    <label for="txtMet">Mét</label>
+    <input type="text" id="txtMet" placeholder="Nhập mét..." disabled/>
+    <br/><br/>
+    <input type="button" id="btnFeet" value="feet" onclick="let m = parseInt(prompt('Nhập met'));let f = m * 3.2808;alert(f);"/>
+</form>
+<script>
+    //f = m * 3.2808;
+
+    //lấy nút btnFeet
+
+    //khi bấm nút btnFeet thì HÀNH ĐỘNG
+
+    //hàm HÀNH ĐỘNG
+
+    //Nhập dữ liệu từ txtMet
+
+    //nếu dữ liệu k hợp lệ thì message = "Dữ liệu k hợp lệ!";
+    //nếu hợp lệ f = m * 3.2808;
+    //message = x;
+
+    //alert(x);
+</script>
+
+
+<h3 id="bai3">Bài 3: Tính diện tích hình vuông khi biết cạnh a.</h3>
+<form>
+    <label for="txtCanhA1">Cạnh a</label>
+    <input type="text" id="txtCanhA1" placeholder="Nhập cạnh a..." disabled/>
+    <br/><br/>
+    <input type="button" id="btnVuong" value="feet" onclick="let a=parseInt(prompt('Nhập cạnh a'));alert('Diện tích hình vuông '+a*a);"/>
+</form>
+<script>
+    //area square = a*a
+
+    //lấy nút btnVuong
+
+    //khi bấm nút btnVuong thì HÀNH ĐỘNG
+
+    //hàm HÀNH ĐỘNG
+
+    //Nhập dữ liệu từ txtCanhA1
+
+    //nếu dữ liệu k hợp lệ thì message = "Dữ liệu k hợp lệ!";
+    //nếu hợp lệ s = a*a;
+    //message = x;
+
+    //alert(x);
+</script>
+
+
+<h3 id="bai4">Bài 4: Tính diện tích hình chữ nhật khi biết 02 cạnh a, b.</h3>
+<form>
+    <label for="txtCanhA2"></label>
+    <input type="text" id="txtCanhA2" placeholder="Nhập cạnh a..." disabled/>
+    <br/><br/>
+    <label for="txtCanhB2"></label>
+    <input type="text" id="txtCanhB2" placeholder="Nhập cạnh b..." disabled/>
+    <br/><br/>
+    <input type="button" id="btnChuNhat" value="Diện tích hình chữ nhật" onclick="let a = parseInt(prompt('Nhập cạnh a'));let b= parseInt(prompt('Nhập cạnh b'));alert('Diện tích hình chữ nhật '+a*b);"/>
+</form>
+<script>
+    //rectangular area = a*b
+
+    //lấy nút btnTamGiac
+
+    //khi bấm nút btnTamGiac thì HÀNH ĐỘNG
+
+    //hàm HÀNH ĐỘNG
+
+    //Nhập dữ liệu từ txtCanhA2, txtCanhB2
+
+    //nếu dữ liệu k hợp lệ thì message = "Dữ liệu k hợp lệ!";
+    //nếu hợp lệ s = a*b;
+    //message = x;
+
+    //alert(x);
+</script>
+
+
+<h3 id="bai5">Bài 5: Tính diện tích tam giác vuông khi biết 02 cạnh kề a, b.</h3>
+<form>
+    <label for="txtCanhA3"></label>
+    <input type="text" id="txtCanhA3" placeholder="Nhập cạnh a..." disabled/>
+    <br/><br/>
+    <label for="txtCanhB3"></label>
+    <input type="text" id="txtCanhB3" placeholder="Nhập cạnh b..." disabled/>
+    <br/><br/>
+    <input type="button" id="btnTamGiac" value="Diện tích tam giác vuông" onclick="let a = parseInt(prompt('Nhập cạnh a'));let b= parseInt(prompt('Nhập cạnh b'));alert('Diện tích tam giác vuông '+a*b/2);"/>
+</form>
+<script>
+    //tam giác VUÔNG = diện tích HÌNH CHỮ NHẬT/2
+    //suy ra area of right triangle = a*b/2
+
+    //lấy nút btnTamGiac
+
+    //khi bấm nút btnTamGiac thì HÀNH ĐỘNG
+
+    //hàm HÀNH ĐỘNG
+
+    //Nhập dữ liệu từ txtCanhA3, txtCanhB3
+
+    //nếu dữ liệu k hợp lệ thì message = "Dữ liệu k hợp lệ!";
+    //nếu hợp lệ s = a*b/2;
+    //message = x;
+
+    //alert(x);
+
+</script>
+
+
+<h3 id="bai6">Bài 6: Giải phương trình bậc 1.</h3>
+<form>
+
+    <input type="text" id="txtA1" placeholder="a..." disabled/> <label for="txtA1">x+</label>
+
+    <input type="text" id="txtB1" placeholder="b..." disabled/><label for="txtB1">=0</label>
+    <br/><br/>
+    <input type="button" id="btnBac1" value="giải phương trình bậc 1" onclick="let a = parseInt(prompt('Nhập a'));let b= parseInt(prompt('Nhập b'));alert('x= '+ (-b/a));"/>
+</form>
+<script>
+    //ax + b = 0;
+    //x = -b/a;
+
+    //lấy nút btnBac1
+
+    //khi bấm nút btnBac1 thì HÀNH ĐỘNG
+
+    //hàm HÀNH ĐỘNG
+
+    //Nhập dữ liệu từ txtA1, txtB1
+
+    //nếu dữ liệu k hợp lệ thì message = "Dữ liệu k hợp lệ!";
+    //nếu hợp lệ x = -b/a;
+    //message = x;
+
+    //alert(x);
+
+</script>
+
+
+<h3 id="bai7">Bài 7: Giải phương trình bậc 2.</h3>
+<form>
+    <label for="txtA2"></label>
+    <input type="text" id="txtA2" placeholder="a..." disabled/>x<sup>2</sup> +
+    <label for="txtB2"></label>
+    <input type="text" id="txtB2" placeholder="b..." disabled/>x +
+    <label for="txtC2"></label>
+    <input type="text" id="txtC2" placeholder="c..." disabled/>=0
+    <br/><br/>
+    <input type="button" id="btnBac2" value="Giải phương trình bậc 2" onclick="ptBac2();"/>
+</form>
+<script>
+    function ptBac2(){
+        //ax2 + bx + c = 0;
+        let a = parseInt(prompt('Nhập a'));
+        let b= parseInt(prompt('Nhập b'));
+        let c= parseInt(prompt('Nhập c'));
+        let x1,x2,delta;
+
+        //trường hợp a+b+c=0 =>x1=1 , x2=c/a;
+        if((a+b+c)===0){
+            x1=1;
+            x2=c/a;
+            display(x1,x2);
+        }
+        //trường hợp a-b+c=0 =>x1=-1, x2=-c/a;
+        else if((a-b+c)===0){
+            x1=-1;
+            x2=-c/a;
+            display(x1,x2);
+        }else{//xét delta
+            //delta = b2 - 4ac;
+            delta = Math.pow(b,2) - 4*a*c;
+
+            //delta<0 , vô nghiệm
+            if(delta<0){alert("vô nghiệm");}
+
+            //delta=0, x1=x2=-b/2*a;
+            else if(delta===0){
+                x1=-b/2*a;
+                x2=x1;
+                display(x1,x2);
+            }
+
+            //delta>0, x1,2 = (-b+-Math.sqrt(delta))/2*a
+            else if(delta>0){
+                x1=(-b+Math.sqrt(delta))/2*a;
+                x2=(-b-Math.sqrt(delta))/2*a;
+                display(x1,x2);
+            }
+        }
+
+
+
+        function display(x1,x2){
+            alert("x1 = " + x1 + ",x2 = " + x2);
+        }
+    }
+
+
+
+
+
+    //alert(x);
+</script>
+
+
+<h3 id="bai8">Bài 8: Kiểm tra xem một số nhập vào có phải là tuổi của một người không. Một số nguyên là tuổi của một người khi nhỏ
+    120 và lơn hơn 0.
+</h3>
+<form>
+    <label for="txtTuoi"></label>
+    <input type="text" id="txtTuoi" placeholder="Nhập số nguyên..." disabled/>
+    <br/><br/>
+    <input type="button" id="btnCheckTuoi" value="Check Tuổi" onclick="let n=prompt('Nhập số nguyên');n>0&&n<120?alert(n + ' là tuổi'):alert(n + ' k là tuổi');"/>
+</form>
+<script>
+    //lấy nút btnCheckTuoi
+
+    //khi bấm nút btnCheckTuoi thì HÀNH ĐỘNG
+
+    //hàm HÀNH ĐỘNG
+
+    //Nhập dữ liệu từ txtTuoi
+
+    //nếu dữ liệu k hợp lệ thì message = "Dữ liệu k hợp lệ!";
+
+    //nếu ok thì check 0<tuoi<120 nếu sai thì message = tuoi + "Không phải là tuổi người";
+
+    //nếu đúng thì message = tuoi + " la tuổi người!";
+
+    //alert(message);
+
+</script>
+
+
+<h3 id="bai9">
+    <pre>
+    Bài 9: Kiểm tra xem 3 số thực (a,b,c) nhập vào có phải là cạnh của một tam giác. Điều kiện để a,b,c là cạnh của một
+    tam giác là:
+
+    a,b,c > 0
+    a + b > c
+    b + c > a
+    a + c > b
+    </pre>
+</h3>
+
+<form>
+    <label for="txtA"></label>
+    <input type="textA" id="txtA" placeholder="Nhập a..." disabled/>
+    <br/><br/>
+    <label for="txtB"></label>
+    <input type="text" id="txtB" placeholder="Nhập b..." disabled/>
+    <br/><br/>
+    <label for="txtC"></label>
+    <input type="text" id="txtC" placeholder="Nhập c..." disabled/>
+    <br/><br/>
+    <input type="button" id="btnTamGiac2" value="Kiểm tra tam giác" onclick="checkTriangle()?alert(' là 03 cạnh tam giác'):alert(' k là 03 cạnh tam giác');"/>
+</form>
+<script>
+function checkTriangle(){
+    let a = parseInt(prompt("Nhập cạnh a"));
+    let b = parseInt(prompt("Nhập cạnh b"));
+    let c = parseInt(prompt("Nhập cạnh c"));
+
+    //a,b,c > 0
+    let dk1 = a>0 && b>0 && c>0;
+    //a + b > c
+    let dk2 = a+b>c;
+
+    //b + c > a
+    let dk3 = b + c > a;
+
+    //a + c > b
+    let dk4 = a + c > b;
+
+    return dk1 && dk2 && dk3 && dk4 ? true:false;
+}
+</script>
+
+
+<h3>Bài 10: Viết chương trình tính giá điện.</h3>
+<form>
+    <label for="txtW"></label>
+    <input type="text" id="txtW" placeholder="Nhập số watt tiêu thụ..." disabled/>
+    <br/><br/>
+    <input type="button" id="btnTienDien" value="Tính tiền điện" onclick="let watt=prompt('Nhập số watt tiêu thụ');alert(watt*3000);"/>
+</form>
+<script>
+    let btnTienDien;
+    //lấy nút btnTienDien
+
+    //khi bấm nút btnTienDien thì HÀNH ĐỘNG
+
+    //hàm HÀNH ĐỘNG
+
+    //Nhập dữ liệu từ txtW
+
+    //nếu dữ liệu k hợp lệ thì message = "Dữ liệu k hợp lệ!";
+    //nếu hợp lệ thì tienDien = txtW * donGia;
+
+    //alert(tienDien);
+
+</script>
+
+
+<h3>Bài 11: Viết chương trình tính thuế thu nhập cá nhân.</h3>
+<form>
+    <label for="txtThuNhap"></label>
+    <input type="text" id="txtThuNhap" placeholder="Nhập thu nhập của bạn..." disabled/>
+    <br/><br/>
+    <input type="button" id="btnThue" value="Tính thuế thu nhập" onclick="let thuNhap=prompt('thu nhập');let tiSuatThue=prompt('phần trăm thuế thu nhập'); alert((thuNhap * tiSuatThue)/100);"/>
+</form>
+<script>
+    let btnThue;
+    //lấy nút btnThue
+
+    //khi bấm nút btnThue thì HÀNH ĐỘNG
+
+    //hàm HÀNH ĐỘNG
+
+    //Nhập dữ liệu từ txtThuNhap
+
+    //nếu dữ liệu k hợp lệ thì message = "Dữ liệu k hợp lệ!";
+    //nếu hợp lệ thì message = (thuNhap * tiSuatThue)/100;
+
+    //alert(message);
+
+</script>
+
+
+<h3>Bài 12: Viết chương trình tính lãi ngân hàng (lãi mẹ đẻ lãi con) khi biết số tiền ban đầu, số tháng cho vay và lãi
+    xuất hàng tháng.
+</h3>
+<form>
+    <label for="txtSoTien"></label>
+    <input type="text" id="txtSoTien" placeholder="Nhập số tiền gửi..." disabled/>
+    <br/><br/>
+    <label for="txtSoThang"></label>
+    <input type="text" id="txtSoThang" placeholder="Nhập số tháng gửi..." disabled/>
+    <br/><br/>
+    <label for="txtLai"></label>
+    <input type="text" id="txtLai" placeholder="Nhập lãi suất..." disabled/>
+    <br/><br/>
+    <input type="button" id="btnLaiSuat" value="Tính lãi suất hàng tháng" onclick="laiSuat();"/>
+</form>
+<script>
+    function laiSuat(){
+        //laiSuat = (lai1Thang*soThang*soTien)/100
+        let lai1Thang = parseInt(prompt("Nhập lãi 1 tháng"));
+        let soThang = parseInt(prompt("Nhập số tháng"));
+        let soTien = parseInt(prompt("Nhập số tiền"));
+
+        alert("Số tiền lãi thu được" + (lai1Thang*soThang*soTien)/100) ;
+    }
+</script>
+
+
+</body>
+</html><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

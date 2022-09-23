@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lớp Mobile</title>
+</head>
+<body>
+<pre>
+  Viết một lớp các đối tượng điện thoại lấy tên là Mobile, mỗi một chiếc mobile phone khi được tạo ra sẽ mang những đặc điểm sau:
+
+Có một thông số về trạng thái pin tính bằng đơn vị số nguyên (tối đa 100 đv)
+Có một vùng nhớ dùng để lưu tin nhắn đang soạn thảo.
+Có một vùng nhớ dùng để lưu tin nhắn trong hộp thư đến.
+Có một vùng nhớ dùng để lưu tin nhắn đã gửi.
+Có chức năng kiểm tra trạng thái điện thoại bật hay tắt.
+Có chức năng bật và tắt điện thoại.
+Có chức năng xạc pin điện thoại.
+Có chức năng soạn tin nhắn.
+Có chức năng nhận tin nhắn từ một chiếc mobile khác.
+Có chức năng gửi tin nhắn tới một chiếc mobile khác.
+Có chức năng xem tin trong hộp thư đến.
+Có chức năng xem tin đã gửi.
+Sau mỗi lần sử dụng một chức năng, năng lượng pin sẽ giảm đi một đơn vị.
+Các chức năng không thể hoạt động nếu điện thoại chưa bật.
+Khởi tạo các đối tượng điện thoại và thực hiện kịch bản sau:
+
+Có một chiếc điện thoại nokia và một chiếc iphone
+Chiếc điện thoại nokia soạn tin nhắn với nội dung bất kỳ và gửi cho chiếc iphoneChiếc iphone kiểm tra inbox và hiển thị tin đó.
+</pre>
+</body>
+</html>
+<script>
+  /*
+  class: Mobile
+  properties:
+  - battery (pin) -> tối đa 100
+  - composingMemory (vùng nhớ soạn thảo tin nhắn)
+  - inboxMemory (vùng nhớ tinh nhắn đến)
+  - sentMemory (vùng nhớ lưu tin nhắn đã gửi)
+
+  methods:
+  + isOn (kiểm tra điện thoại bật/tắt) ->true/false
+  + turnOn (bật điện thoại)
+  + turnOff (tắt điện thoại)
+  + chargeBattery (sạc pin điện thoại)
+  + composeMessage (soạn tin nhắn)
+  + receiveMessage (nhận tin nhắn từ Mobile khác)
+  + sendMessage (gửi tin nhắn đến Mobile khác)
+  + readInboxMsg (xem tin nhắn trong hộp thư đến)
+  + readSentMsg (xem tin nhắn đã gửi)
+  + sử dụng 01 chức năng pin giảm 01 đơn vị
+  + Các chức năng chưa hoạt động nếu điện thoại chưa bật
+
+   */
+
+  let Mobile = function (battery, composeMemory, inboxMemory, sentMemory, status){
+    this.battery = battery;
+    this.composeMemory = composeMemory;
+    this.inboxMemory = inboxMemory;
+    this.sentMemory = sentMemory;
+    this.status = status;
+
+    this.isOn = function (){
+      return this.status?true:false;
+    }
+
+    this.turnOn = function (){
+      if(!this.isOn()){
+        if(this.battery>0 && this.battery<=100){
+          this.battery--;
+          this.status = true;
+        }
+      }
+    }
+
+    this.turnOff = function (){
+      if(this.isOn()){
+        if(this.battery>0 && this.battery<=100){
+          this.battery--;
+          this.status = false;
+        }
+      }
+    }
+
+    this.chargeBattery = function (){
+      //chú ý điện thoại tắt vẫn sạc được pin
+      if(this.battery<100){
+        this.battery++;
+      }
+    }
+
+    this.composeMessage = function (message){
+      //lưu vào vùng nhớ composeMemory dạng mảng
+      //battery--
+      if(this.isOn()){
+        this.composeMemory = message;
+        this.battery--;
+      }
+    }
+
+    this.sendMessage = function (toMobile){
+        if(this.isOn()){
+            this.battery--;
+            this.sentMemory = this.composeMemory;
+            toMobile.inboxMemory = this.composeMemory;
+        }
+    }
+
+    this.receiveMessage = function (){
+        if(this.isOn()){
+            this.battery--;
+            return "You have a new message!";
+        }
+    }
+
+    this.readMessage = function (){
+        if(this.isOn()){
+            this.battery--;
+            return this.inboxMemory;
+        }
+    }
+
+  }//hết lớp Mobile
+
+  //sử dụng lớp Mobile gửi tin nhắn từ nokia->iphone
+  let nokia = new Mobile(80,"","","",true);
+  let iPhone = new Mobile(90,"","","",true);
+
+  let composingMessage = prompt("Enter your message");
+
+  //trình tự gửi tin nhắn như sau:
+  //nokia soạn thảo tin nhắn->gửi qua iPhone->kiểm tra iPhone nhận được chưa->nhận rồi thì đọc message trên iPhone
+  nokia.composeMessage(composingMessage);
+  nokia.sendMessage(iPhone);
+
+  let isCheck = iPhone.receiveMessage();
+  if(isCheck !=""){
+      alert("Message is: " + iPhone.readMessage());
+  }
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

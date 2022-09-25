@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lớp Rectangle</title>
+</head>
+<body>
+<pre>
+    Mô tả
+Viết một lớp các đối tượng hình chữ nhật lấy tên là Rectangle, mỗi hình chữ nhật đều có những đặc tính sau:
+
++ Có thông số chiều dài (int).
+
++ Có thông số chiều rộng (int).
+
++ Có tính năng tính diện tích.
+
++ Có tính năng tính chu vi.
+
++ Có tính năng hiển thị trực quan hình chữ nhật bằng cách vẽ lên canvas
+
+Sử dụng lớp Rectangle vừa định nghĩa để viết một chương trình JavaScript  với kịch bản như sau:
+
+Khai báo và khởi tạo một đối tượng kiểu Rectangle.
+
+Hiển thị hình chữ nhật trên màn hình web
+
+Thay đổi chiều dài và chiều rộng của hình chữ nhật.
+
+In ra màn hình diện tích và chu vi của hình chữ nhật đó.
+
+Để hoàn thành bài thực hành, học viên cần:
+
+Đưa mã nguồn lên GitHub
+Dán link của repository lên phần nộp bài trên CodeGymX
+Hướng dẫn
+Khai báo lớp Rectangle với các thuộc tính cần thiết
+Bổ sung các phương thức
+Sử dụng canvas để vẽ hình chữ nhật
+Tạo đối tượng và giao diện theo đúng kịch bản
+</pre>
+<canvas id="myCanvas"></canvas>
+</body>
+</html>
+<script>
+    let Rectangle = function(width, height){
+        this.width = width;
+        this.height = height;
+
+        /*+ Có tính năng tính diện tích.*/
+        this.area = function(){
+            return this.width * this.height;
+        }
+
+        /*+ Có tính năng tính chu vi.*/
+        this.perimeter = function (){
+            return (this.width + this.height) * 2;
+        }
+
+        /*+ Có tính năng hiển thị trực quan hình chữ nhật bằng cách vẽ lên canvas*/
+        this.paint = function(top, left){
+            const canvas = document.getElementById("myCanvas");
+            if(canvas.getContext){
+                const ctx = canvas.getContext("2d");
+
+                ctx.fillStyle = "green";
+                ctx.fillRect(top, left, this.width, this.height);
+            }
+        }
+    }/*end class Rectangle*/
+
+    let a = parseInt(prompt("nhập chiều dài hcn"));
+    let b = parseInt(prompt("nhập chiều rộng hcn"));
+
+    if(!isNaN(a)&&!isNaN(b)){
+        let hcn1 = new Rectangle(a,b);
+
+        hcn1.paint(20,20);
+
+        alert("diện tích hình chữ nhật " + hcn1.area());
+
+        alert("chu vi hình chữ nhật " + hcn1.perimeter());
+
+    }else{
+        alert("Dữ liệu k hợp lệ!!!");
+    }
+
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

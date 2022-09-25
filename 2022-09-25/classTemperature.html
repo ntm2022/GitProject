@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lớp Temperature</title>
+</head>
+<body>
+<pre>
+  Mô tả
+Viết một lớp các đối tượng mô tả loại dữ liệu nhiệt độ lấy tên là Temperature. Các thông số mô tả cho nhiệt độ gồm:
+
+Trị số tính theo đơn vị độ C (giá trị nhỏ nhất -273 độ)
+
+Có tính năng chuyển đổi từ độ C sang độ F.
+
+Có tính năng chuyển đổi từ độ C sang độ Kenvin.
+
+Sử dụng lớp vừa định nghĩa để xây dựng một chương trình JavaScript với kịch bản như sau:
+
+Khởi tạo một đối tượng Temperature.
+
+Gán giá trị độ C cho đối tượng ở nhiệt độ 25 độ.
+
+Hiển thị ra màn hình nhiệt độ F và độ Kenvin tương ứng.
+
+Để hoàn thành bài thực hành, học viên cần:
+
+Đưa mã nguồn lên GitHub
+Dán link của repository lên phần nộp bài trên CodeGymX
+Hướng dẫn
+Khai báo lớp Temperature với các thuộc tính cần thiết
+Khai báo các phương thức chuyển đổi nhiệt độ
+Tạo đối tượng và thực hiện các bước theo kịch bản
+</pre>
+</body>
+</html>
+<script>
+    let Temperature = function (celsius) {
+        celsius < -273 ? this.celsius = -273 : this.celsius = celsius;
+        /*Trị số tính theo đơn vị độ C (giá trị nhỏ nhất -273 độ)*/
+
+        /*Có tính năng chuyển đổi từ độ C sang độ F.*/
+        this.celsiusToF = function () {
+            return this.celsius * 1.8 + 32;
+        }
+
+        /*Có tính năng chuyển đổi từ độ C sang độ Kenvin.*/
+        this.celsiusToK = function () {
+            return this.celsius + 273.15;
+        }
+    }
+
+    let n = parseFloat(prompt("Nhập nhiệt độ"));
+
+    if(!isNaN(n)){
+        let temp1 = new Temperature(n);
+        alert(n + " đổi ra độ F " + temp1.celsiusToF());
+        alert(n + " đổi ra độ K " + temp1.celsiusToK());
+    }else(alert("Giá trị k hợp lệ!"))
+
+
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

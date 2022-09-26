@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hàm 02</title>
+</head>
+<body>
+<a href="https://james.codegym.vn/mod/assign/view.php?id=15504">Hàm 02</a>
+<h3>
+    Bài 1: Viết hàm tính bình phương của một số bất kỳ được đưa vào. Gọi hàm vừa xây dựng được.
+</h3>
+<form>
+    <input type="button" value="Tính Bình Phương"
+           onclick="let x=parseInt(prompt('Nhập số n'));alert('Bình phương của ' + x + ' là ' + binhPhuong(x));"/>
+</form>
+<script>
+    function binhPhuong(n) {
+        return n * n;
+    }
+</script>
+<h3>Bài 2: Viết hàm tính diện tích, hàm tính chu vi hình tròn. Gọi hàm vừa xây dựng được</h3>
+<form>
+    <input type="button" value="Tính Diện Tích vs Chu Vi Hình Tròn"
+           onclick="let x=parseFloat(prompt('Nhập bán kính'));alert('Diện tích hình tròn ' + dienTich(x) + ' , Chu vi hình tròn ' + chuVi(x));"/>
+</form>
+
+<script>
+    function dienTich(r) {
+        return 3.14 * Math.pow(r, 2);
+    }
+
+    function chuVi(r) {
+        return 3.14 * 2 * r;
+    }
+</script>
+<h3>Bài 3: Viết hàm tính giai thừa của một số nguyên bất kỳ được đưa vào. Gọi hàm vừa xây dựng được.</h3>
+<form>
+    <input type="button" value="Tính Giai Thừa"
+           onclick="let x = parseInt(prompt('Nhập số nguyên >1')); alert(factorial(x));"/>
+</form>
+<script>
+
+    function factorial(n) {
+        //xét 02 trường hợp n=0 và n=1
+        //khởi tạo i, giaiThua
+        let i = 1;
+        let giaiThua = 1;
+
+        if (n !== 0 && n !== 1) {
+            do {
+                giaiThua *= i++;
+
+            } while (i <= n);//stop là i
+
+            //in ra giaiThua
+            return giaiThua;
+        }
+    }
+
+    //viết lại dạng đệ quy - recursion
+    //hàm sẽ chạy ngược từ n về lại 1
+    //mô phỏng lại bằng 03 vòng lặp
+    function recursionFactorial(n) {
+        if (n === 1) {
+            return 1;
+        } else {
+            return recursionFactorial(n - 1) * n;
+        }
+    }
+
+</script>
+
+<h3>Bài 4: Viết hàm kiểm tra xem ký tự nhập vào có phải là ký tự số không. Nếu là ký tự số hàm trả về true, ngược lại
+    trả về false.</h3>
+<form>
+    <input type="button" value="Bài 4"
+           onclick="let n = parseInt(prompt('Nhập ký tự muốn kiểm tra'));checkNumber(n)?alert('Là số'):alert('Dữ liệu k hợp lệ!');"/>
+</form>
+<script>
+    function checkNumber(a) {
+        return !isNaN(a);
+    }
+</script>
+<h3>Bài 5: Viết hàm nhận vào 3 số nguyên bất kỳ, trả về số nguyên có giá trị nhỏ nhất.</h3>
+<form>
+    <input type="button" value="Bài 5" onclick="let n1 = parseInt(prompt('Nhập số thứ 1'));
+                                                let n2 = parseInt(prompt('Nhập số thứ 2'));
+                                                let n3 = parseInt(prompt('Nhập số thứ 3'));
+                                                alert('Số nhỏ nhất là ' + findMin(n1, n2, n3));
+"/>
+</form>
+<script>
+    function findMin(a1, a2, a3) {
+        let min = a1;
+        if (a2 < min) { min = a2; }
+        if (a3 < min) { min = a3; }
+        return min;
+    }
+</script>
+<h3>
+    Bài 6: Viết hàm nhận vào một số, kiểm tra xem nếu số đưa vào có phải là nguyên dương không. Nếu là nguyên dương trả
+    về true, ngược lại trả về false.
+</h3>
+<form>
+    <input type="button" value="Bài 6"
+           onclick="let n = prompt('Nhập số muốn kiểm tra');
+           checkInt(n)?alert(n + ' là số nguyên dương'):alert('Dữ liệu k hợp lệ!');"/>
+</form>
+<script>
+    function checkInt(a){
+        if(!isNaN(a)){//nếu là số mới check
+            return a>0 && a/parseInt(a)===1; //check nguyên dương
+        }else{return false;}
+    }
+</script>
+<h3>Bài 7: Viết hàm truyền vào 2 số nguyên bất kì, thực hiện đổi chỗ hai số nguyên đó.</h3>
+<form>
+    <input type="button" value="Bài 7"
+           onclick="let n1 = parseInt(prompt('Nhập số thứ 1'));
+                   let n2 = parseInt(prompt('Nhập số thứ 2'));
+                   checkInt(n1) && checkInt(n2) ? reArrange(n1, n2) : alert('Dữ liệu k hợp lệ!');"/>
+</form>
+<script>
+    function reArrange(n1, n2){
+        let temp = n1;
+        n1 = n2;
+        n2 = temp;
+        alert ("Số thứ 1 là " + n1);
+        alert ("Số thứ 2 là " + n2);
+    }
+</script>
+<h3>Bài 8: Viết hàm truyền vào mảng số nguyên bất kỳ, sau đó đảo ngược mảng số nguyên đó.</h3>
+<form>
+    <input type="button" value="Bài 8" onclick="run();" />
+</form>
+<script>
+    function run(){
+        let array = createArray();
+        alert(array);
+
+        let rArray = reverseArray(array);
+        alert(rArray);
+
+        function createArray(){
+            //Create array elements
+            let arr = [];
+            do{
+                n = parseInt(prompt("Add 1 more integer number(enter any character to stop)"));
+                if(isNaN(n)){
+                    break;
+                }else{
+                    arr.push(n);
+                }
+            }while(1);
+            return arr;
+        }
+
+        function reverseArray(arr){
+            let j = arr.length-1;
+            let temp = 0;
+            for(let i=0;i<arr.length/2;i++){
+                if(j>arr.length/2){
+                    temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+                j--;
+            }
+            return arr;
+        }
+
+    }
+</script>
+<h3>
+    Bài 9: Viết hàm truyền vào một mảng ký tự, và một ký tự bất kỳ, kiểm tra xem ký tự bất kỳ đó có nằm trong mảng
+    không. Nếu có trả về số lần xuất hiện của ký tự đó, nếu không trả về -1.
+</h3>
+<form>
+    <input type="button" value="Bài 9" onclick="runLesson9();" />
+</form>
+<script>
+    function runLesson9(){
+        let array = createArray();
+        alert(array);
+        let c = prompt("Nhập kí tự muốn tìm");
+
+        let found = findChar(c);
+        found===-1?alert("Không tìm thấy kí tự " + c):alert("tìm thấy kí tự " + c);
+
+        function createArray(){
+            //Create array elements
+            let arr = [];
+            do{
+                n = prompt("Add 1 more character(enter to stop)");
+                if(!isLetter(n)){
+                    break;
+                }else{
+                    arr.push(n);
+                }
+            }while(1);
+            return arr;
+        }
+
+        function isLetter(str) {
+            return str.length === 1 && str.match(/[a-zA-Z]/i);
+        }
+
+        function findChar(c){
+            for(let i=0;i<array.length;i++){
+                if(array[i]===c){
+                    return true;
+                }
+            }
+            return -1;
+        }
+    }
+</script>
+</body>
+</html><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

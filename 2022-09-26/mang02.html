@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài tập mảng 02</title>
+</head>
+<body>
+<pre>
+  Bài 1: Viết chương trình khởi tạo mảng 2 chiều, gồm một bộ các phần tử có sẵn,  in ra các phần tử trong mảng. Chú ý: Sử dụng vòng lặp for lồng nhau
+Ví dụ mảng sau:
+
+let a = [
+[1, 2, 1, 24],
+[8, 11, 9, 4],
+[7, 0, 7, 27],
+[7, 4, 28, 14],
+[3, 10, 26, 7]
+];
+Kết quả mẫu
+
+"row 0"
+" 1"
+" 2"
+" 1"
+" 24"
+"row 1"
+Xem hướng dẫn tại:
+
+https://www.w3resource.com/javascript-exercises/javascript-array-exercise-10.php
+</pre>
+<form>
+  <input type="button" id="btnBai1" value="Bài 1" onclick="array2D();"/>
+</form>
+<script>
+  function array2D(){
+    let a = [
+      [1, 2, 1, 24],
+      [8, 11, 9, 4],
+      [7, 0, 7, 27],
+      [7, 4, 28, 14],
+      [3, 10, 26, 7]
+    ];
+
+    for(let i=0;i<a.length;i++){
+      for(let j=0;j<a[i].length;j++){
+        console.log(a[i][j]);
+      }
+    }
+
+  }
+</script>
+<pre>
+  Bài 2: Viết một chương trình để in các ký tự trong một mảng theo thứ tự đảo ngược.
+  Ví dụ, nếu một mảng chứa các ký tự  [ 'c', 's', 'c', '2', '6', '1' ] sau khi thực hiện đảo ngược sẽ là "162csc"
+</pre>
+<form>
+  <input type="button" id="btnBai2" value="Bài 2" onclick="reversePrint();"/>
+</form>
+<script>
+  function reversePrint(){
+    let a = [ 'c', 's', 'c', '2', '6', '1' ];
+
+    for(let i=a.length-1;i>=0;i--){
+      console.log(a[i]);
+    }
+  }
+</script>
+<pre>
+  Bài 3: Viết một chương trình khai báo một mảng ký tự và kích thước của mảng. Chương trình này đếm số ký tự số trong mảng.
+</pre>
+<form>
+  <input type="button" id="btnBai3" value="Bài 3" onclick="runLess03();"/>
+</form>
+<script>
+  function runLess03(){
+    let array = createArray();
+
+    alert(array);
+
+    let a = demSo(array);
+
+    a!==0?alert(a):alert("K có kí tự số nào");
+
+    function createArray(){
+      //Create array elements
+      let arr = [];
+      let n;
+      do{
+        n = prompt("Add 1 more character(enter to stop)");
+        if(!isLetter(n)){
+          break;
+        }else{
+          arr.push(n);
+        }
+      }while(1);
+      return arr;
+    }
+
+    function isLetter(str) {
+      return str.length === 1 && str.match(/[a-zA-Z0-9]/i);
+    }
+
+    function demSo(arr){
+      let count =0;
+      for(let i=0;i<arr.length;i++){
+        if(!isNaN(arr[i])) {   count++;}
+      }
+      return count;
+    }
+  }
+</script>
+
+<pre>
+  Bài 4: Viết một chương trình để đếm số từ trong một chuỗi
+</pre>
+<form>
+  <input type="button" id="btnBai4" value="Bài 4" onclick="let s = prompt('Nhập chuỗi');alert(countWords(s));"/>
+</form>
+<script>
+  function countWords(s){
+    //số từ = số khoảng trắng + 1
+    let count =0;
+    for(let i=0;i<s.length;i++){
+      if(s[i] ===" "){count++;}
+    }
+    return ++count;
+  }
+</script>
+<pre>
+  Bài 5: Viết một chương trình nhập vào 2 chuỗi, sau đó kiểm tra xem hai chuỗi có giống nhau hay không.
+</pre>
+<form>
+  <input type="button" id="btnBai5" value="Bài 5" onclick="let s1=prompt('Nhập s1');let s2=prompt('Nhập s2');compareString(s1,s2)?alert('Giống'):alert('Khác');"/>
+</form>
+<script>
+  //so sánh length của 02 chuỗi và chạy mảng so sánh song song mỗi phần tử của 02 chuỗi có === k?
+  function compareString(s1,s2){
+    if(s1.length!==s2.length){
+      return false;
+    }else{
+      for(let i=0;i<s1.length;i++){
+        if(s1[i]!==s2[i]){return false;}
+      }
+    }
+    return true;
+  }
+</script>
+<pre>
+  Bài 6: Viết chương trình nhập vào một mảng ký tự, tìm tất cả các ký tự trong mảng là (-) và thay thế các ký tự này bởi ký tự ( _ )
+</pre>
+<form>
+  <input type="button" id="btnBai6" value="Bài 6" onclick="runLess06();"/>
+</form>
+<script>
+  //tìm dấu - nếu tìm thấy thì thay arr[i] bằng dấu _
+  function runLess06(){
+    //tạo mảng kí tự (nhớ check isLetter)
+    let array = createArray();
+    alert(array);
+    let newArray = findMinus(array);
+
+    alert(newArray);
+
+    function createArray(){
+      //Create array elements
+      let arr = [];
+      let n;
+      do{
+        n = prompt("Add 1 more character(enter to stop)");
+        if(!isLetter(n)){
+          break;
+        }else{
+          arr.push(n);
+        }
+      }while(1);
+      return arr;
+    }
+
+    function isLetter(str) {
+      return str.length === 1 && str.match(/[a-zA-Z0-9-]/i); //cho nhập luôn dấu -
+    }
+
+    //hàm findMinus trả về mảng sau khi hoàn thành
+    function findMinus(arr){
+      for(let i=0;i<arr.length;i++){
+        if(arr[i]==="-"){arr[i]="_";}
+      }
+      return arr;
+    }
+  }
+</script>
+</body>
+</html><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

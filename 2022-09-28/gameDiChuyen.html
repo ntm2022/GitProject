@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Di Chuyển</title>
+</head>
+<body>
+<div id="game"></div>
+</body>
+</html>
+<script>
+  function Hero(image, top, left, size){
+    this.image = image;
+    this.top = top;
+    this.left = left;
+    this.size = size;
+
+    this.getHeroElement = function(){//hàm này trả về thẻ html <img> chứa ảnh nhân vật
+      return '<img alt="hình nhân vật" width="'+ this.size + '"' +
+              ' height="'+ this.size + '"' +
+              ' src="' + this.image +'"' +
+              ' style="top: '+this.top+'px; left:'+this.left+'px;position:absolute;" />';
+    }
+
+    this.moveRight = function(){
+      this.left += 20;
+      console.log('ok: ' + this.left);
+    }
+
+  }
+
+  var hero = new Hero('car1.png', 20, 30, 200);
+
+  function start(){
+    if(hero.left < window.innerWidth - hero.size){ //điều kiện chưa đụng màn hình
+
+      hero.moveRight();
+
+    }//di chuyển qua phải nhân vật bằng cách thay đổi thuộc tính left với điều kiện nhân vật chưa đụng màn hình
+    //
+    document.getElementById('game').innerHTML = hero.getHeroElement();//gắn vào thẻ id="game
+
+    let speed = 500;//thời gian chạy hàm start kế tiếp là 500, giá trị delay càng nhỏ thì tốc độ thực thi hàm start càng nhanh.
+    setTimeout(start, speed);
+  }
+
+  start(); //đoạn mã này chạy chương trình ngay khi mở file html lên
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

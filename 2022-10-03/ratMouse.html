@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meo bat Chuot</title>
+</head>
+<body>
+<pre>
+    Mô tả
+Viết một lớp mô tả đối tượng chuột lấy tên là Rat, với những đặc điểm được mô tả như sau:
+
+Có thuộc tính tên.
+
+Có thuộc tính khối lượng.
+
+Có thuộc tính tốc độ.
+
+Có thuộc tính mô tả trạng thái: sống, chết.
+
+Có khả năng thực hiện hành vi kêu (ví dụ “chít, chít”)
+
+Viết một lớp mô tả đối tượng mèo lấy tên là Cat với những đặc điểm được mô tả như sau:
+
+Có thuộc tính tên.
+
+Có thuộc tính khối lượng.
+
+Có thuộc tính tốc độ di chuyển tối đa.
+
+Có khả năng thực hiện hành vi kêu (ví dụ: “meo meo”).
+
+Có khả năng bắt chuột, mỗi lần chỉ bắt được một con. Chỉ bắt được chuột khi tốc độ của mèo lớn hơn tốc độ của chuột.
+
+Có khả năng ăn thịt chuột. Chỉ ăn chuột còn sống. Khi ăn, khối lượng của mèo tăng lên tương ứng.
+
+Viết một đoạn chương trình mô phỏng lại quá trình mèo bắt chuột và ăn chuột dựa trên các lớp vừa mô tả trên.
+</pre>
+</body>
+</html>
+<script>
+    'use strict'
+
+    let Rat = function (name, weight, speed, status) {
+        this.name = name;
+        this.weight = weight;
+        this.speed = speed;
+        this.status = status;
+        this.squeal = function () {
+            alert("Chit chit!");
+        }
+    }
+
+    let Cat = function (name, weight, maxSpeed) {
+        this.name = name;
+        this.weight = weight;
+        this.maxSpeed = maxSpeed;
+        this.squeal = function () {
+            alert("Meo meo!");
+        }
+        this.catchRat = function (rat) {
+            //chi bat duoc khi toc do Cat > Rat.speed
+            if (rat.speed < cat.maxSpeed) {
+                return true;
+            }
+        }
+        this.eatRat = function (rat) {
+            //chi an chuot song + an xong weight tang len tuong ung
+            if(rat.status){
+                this.weight += rat.weight;
+                return true;
+            }
+            return false;
+        }
+    }
+
+    let rat = new Rat("Jerry", 0.3, 15, 1);
+
+    let cat = new Cat("Tom", 5, 45);
+
+    document.write("Trong luong ban dau cua CHUOT: " + rat.weight + " Speed chuot: " + rat.speed + "<br/>");
+
+    document.write("Trong luong ban dau cua MEO: " + cat.weight + " Speed meo: " + cat.maxSpeed + "<br/>");
+
+    rat.squeal();
+    cat.squeal();
+
+    cat.catchRat(rat)?document.write("Meo bat duoc chuot" + "<br/>"):document.write("Catch me if you can! I'm rat." + "<br/>");
+
+    cat.eatRat(rat)?document.write("Weight of CAT now is " + cat.weight):document.write("Chuot hoi qua, k an duoc!!!");
+
+    console.log(rat)
+
+    console.log(cat)
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

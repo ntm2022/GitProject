@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adam vs Eva</title>
+</head>
+<body>
+<pre>
+    01-Viết một lớp lấy tên là Apple, với mỗi quả táo đều có những đặc điểm sau đây:
+
++ Có khối lượng.
+
++ Khi tạo ra quả táo đã có khối lượng mặc định là 10 đv.
+
++ Các đối tượng khác có thể biết được khối lượng của quả táo, nhưng không thay đổi được giá trị này.
+
+    02-Viết một lớp có tên là Human, với mỗi một người được tạo ra sẽ mang đầy đủ những đặc tính sau:
+
++ Có tên.
+
++ Có giới tính.
+
++ Có cân nặng.
+
++ Biết nói một chuỗi các từ. (bằng cách in ra màn hình console chuỗi đó)
+
++ Biết ăn táo. Mỗi lần ăn, chỉ ăn một miếng táo (1đv). Khi ăn táo, khối lượng của người đó sẽ tăng lên một đv và khối lượng quả táo sẽ giảm đi một đv. Chỉ ăn táo khi khối lượng của quả táo lớn hơn 0.
+
++ Biết kiểm tra khối lượng của quả táo.
+
++ Các đối tượng khác có thể biết được tên, giới tính và cân nặng của đối tượng người.
+</pre>
+</body>
+</html>
+<script>
+    'use strict'
+    let Apple = function (){
+        this.weight = 10;
+        this.getWeight = function (){return this.weight;}
+    }
+    let Human = function (name, gender, weight){
+        this.name = name;
+        this.gender = gender;
+        this.weight = weight;
+        this.speak = function (words){
+            console.log(words);
+        }
+        this.eatApple = function (apple){
+            if(apple.weight){
+                this.weight++;
+                apple.weight--;
+            }
+        }
+        this.getAppleWeight = function (apple){
+            return apple.getWeight();
+        }
+        this.getName = function (){return this.name;}
+        this.isMale = function (){return this.gender;}
+        this.setGender = function (gender){
+            this.gender = gender;
+        }
+        this.getWeight = function (){return this.weight;}
+    }
+
+    //test run
+    let apple = new Apple();
+    console.log(apple);
+
+    let man = new Human("Adam", true, 65);
+    let woman = new Human("Eva", true, 45);
+    woman.setGender(false);//define gender of Eva is female
+
+    console.log(man);
+    console.log(woman);
+
+    man.speak("I am ADAM");
+    woman.speak("I am EVA");
+
+    man.eatApple(apple);
+
+    console.log("Adam bite apple!");
+
+    woman.eatApple(apple);
+
+    console.log("Eva also bite apple!!");
+
+    console.log("Apple weight now is " + apple.getWeight());
+    console.log("Adam Weight now is " + man.getWeight());
+
+    console.log(man.getName() + " know apple weight is " + man.getAppleWeight(apple));
+    /*console.log(woman.getName() + " is " + woman.isMale()?' MALE':' FEMALE');*/
+    let name = woman.getName();
+    let gender = woman.isMale()?' MALE':' FEMALE';
+    console.log(name + " is " + gender);
+
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

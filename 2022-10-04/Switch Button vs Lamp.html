@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Switch Button vs Lamp</title>
+</head>
+<body>
+<pre>
+    Khi công tắc bật hoặc tắt, hiển thị ra màn hình trạng thái của bóng đèn.
+
++Sử dụng các lớp vừa tạo xây dựng chương trình java theo kịch bản sau:
+
++Khai báo và khởi tạo một đối tượng công tắc và một đối tượng bóng đèn điện.
+
++Kết nối công tắc với bóng đèn.
+
++Bật tắt công tắc 10 lần.
+</pre>
+</body>
+</html>
+<script>
+'use strict'
+let SwitchButton = function (status, lamp){
+    this.statuc = status;
+    this.lamp = lamp;
+    this.connectToLamp = function (lamp){
+        return true;
+    };
+    this.switchOff = function (lamp){
+        if(this.status){
+            this.status = false;
+            lamp.turnOff();
+        }
+        console.log(lamp.status?"ON":"Off");
+    };
+    this.switchOn = function (lamp){
+        if(!this.status){
+            this.status = true;
+            lamp.turnOn();
+        }
+        console.log(lamp.status?"ON":"Off");
+    };
+}
+
+let ElectricLamp = function (status){
+    this.status = status;
+    this.turnOff = function(){
+        if(this.status){this.status = false;}
+    };
+    this.turnOn = function (){
+        if(!this.status){this.status = true;}
+    };
+}
+
+let sButton = new SwitchButton(false);
+
+let lamp = new ElectricLamp(false);
+console.log(sButton);
+console.log(lamp);
+
+if(sButton.connectToLamp(lamp)){
+    for(let i=0;i<10;i++){ //switch off and switch on 10 times
+        sButton.switchOff(lamp);
+        sButton.switchOn(lamp);
+    }
+}
+
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Remote TV</title>
+</head>
+<body>
+<pre>
+  Mô tả
+Viết một lớp mô tả đối tượng điều khiển từ xa tivi lấy tên là Remote với những đặc điểm như sau:
+
+Có thuộc tính mã.
+
+Có tính năng điều khiển chuyển kênh.
+
+Có tính năng điều khiển âm lượng.
+
+Viết một lớp mô tả đối tượng tivi lấy tên là TiVi với những đặc điểm sau:
+
++Có thuộc tính mô tả kênh hiện thời đang phát.
+
++Có thuộc tính mô tả âm lượng hiện thời
+
++Có thuộc tính mô tả trạng thái bật, tắt.
+
++Có tính năng điều khiển chuyển đến kênh nào đó.
+
++Có tính năng điều khiển âm lượng.
+
+Viết một chương trình sử dụng Remote để điều khiển TiVi theo kịch bản như sau:
+
++Khai báo và khởi tạo một chiếc Tivi.
+
++Khai báo và khởi tạo một chiếc Remote.
+
++Bật tivi.
+
++Chuyển đến kênh 7.
+
++Dùng remote chuyển đến kênh 3.
+
++Tăng âm lượng lên 2 đơn vị.
+
++Dùng remote tắt tivi.
+</pre>
+</body>
+</html>
+<script>
+    'use strict'
+    let Remote = function (code) {
+        this.code = code;
+        this.changeChannel = function (tivi, channel) {
+            if (tivi.status) {
+                tivi.changeChannel(channel);
+            }
+        };
+        this.changeVolume = function (tivi, volume) {
+            if (tivi.status) {
+                tivi.changeVolume(volume);
+            }
+        };
+        this.turnOff = function(tivi){
+            if(tivi.status){
+                tivi.turnOff();
+            }
+        }
+    };
+
+    let Tivi = function (channel, volume, status) {
+        this.channel = channel;
+        this.volume = volume;
+        this.status = status;
+        this.turnOn = function () {
+            if (!this.status) {
+                this.status = true;
+            }
+            console.log("Welcome to CodeGYM TV!!!");
+        }
+        this.turnOff = function () {
+            if (this.status) {
+                this.status = false;
+            }
+            console.log("Bye bye CodeGYM TV!!!");
+        };
+        this.changeChannel = function (channel) {
+            this.channel = channel;
+            console.log("Channel " + this.channel);
+        };
+        this.changeVolume = function (volume) {
+            this.volume += volume;
+            console.log("Volume " + this.volume);
+        };
+    };
+
+    let tivi = new Tivi(5, 20, true);
+    let remote = new Remote(5);
+
+    console.log(tivi);
+    console.log(remote);
+
+    tivi.turnOn();
+    tivi.changeChannel(7);
+    remote.changeChannel(tivi, 3);
+    remote.changeVolume(tivi, -2);
+    remote.turnOff(tivi);
+
+    console.log(tivi);
+
+</script><script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>

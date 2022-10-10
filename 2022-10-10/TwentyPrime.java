@@ -18,7 +18,7 @@ public class TwentyPrime {
             N++;
         }
     }
-    //count 0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19
+    //count 0-19
     //N tang mai
     private static boolean isPrime(int count){ //thêm static ở đây để dùng thẳng hàm này mà k cần tạo đối tượng
         for(int i=2;i<count;i++){

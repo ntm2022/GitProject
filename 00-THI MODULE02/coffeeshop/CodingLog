@@ -1,0 +1,5 @@
+01-Tinh getTotal() -> tinh tien thoi lai cho khach trong List receipts
+02-Xu ly luu Hash Map vao file receipts.csv -> file csv hien thi dang: {1=2, 2=3}
+03-Xu ly readFromFile() de dua Hash Map vao List receipts -> cat chuoi bang ham split() dua cac cap Key=value  vao mang Hash Map bang ham put()
+04-Xu ly trimDate() do luc searchByDate chi can so sanh Ngay ,bo qua H:m:s
+05-Tao file Setting de luu phan CAU HINH CHUNG và cac HAM XU LY CHUNG
